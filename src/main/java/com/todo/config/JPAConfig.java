@@ -63,6 +63,7 @@ public class JPAConfig {
         properties.put(ApplicationConstants.HIBERNATE_SHOW_SQL, mySqlConfig.getShow_sql());
         properties.put(ApplicationConstants.HIBERNATE_DDL_MODE, mySqlConfig.getHibernateCreateMode());
         return properties;
+
     }
 
     @Bean

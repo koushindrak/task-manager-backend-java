@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity(name = "Slip")
 @Table(name = "slip")
-public class Slip extends ParentEntity{
+public class Slip extends ParentEntity {
     @Id
     private String id;
 
