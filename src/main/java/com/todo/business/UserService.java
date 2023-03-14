@@ -1,100 +1,51 @@
 package com.todo.business;
 
 import com.todo.dao.UserRepository;
-import com.todo.dto.UserRequest;
-import com.todo.dto.UserResponse;
-import com.todo.entity.Role;
 import com.todo.entity.User;
-import com.todo.exceptions.ValidationException;
-import com.todo.utils.CommonUtils;
-import org.springframework.beans.BeanUtils;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-
-import static com.todo.constants.ApplicationConstants.ADMIN_ROLE_ID;
 
 @Service
+@Transactional
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    public void createUser(UserRequest userRequest) {
-        System.out.println("userRequest--" + userRequest);
-
-        if (userRequest.getRoleId().equals(ADMIN_ROLE_ID)) {
-            if (!CommonUtils.getRoleIdOfLoggedInUser().equals(ADMIN_ROLE_ID))
-                throw new ValidationException(HttpStatus.BAD_REQUEST.value(), "You do not have access to create another admin");
-        }
-
-        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        User user = new User();
-        BeanUtils.copyProperties(userRequest,user);
-        user.setId(CommonUtils.generateUUID());
-//        Role role = (Role) userRepository.readById(Role.class, userRequest.getRoleId());
-//        user.setUserRole(role);
-        userRepository.save(user);
-    }
-
-    public Object getUsers() {
-        System.out.println("GettingUsers");
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public UserResponse getUserById(String id) {
-        User user = userRepository.findById(id).get();
-        if(Objects.isNull(user)){
-            throw new ValidationException(HttpStatus.BAD_REQUEST.value(),"User doesn't exist " + "with" + " id - "+id);
-        }
-        UserResponse userResponse = new UserResponse();
-        BeanUtils.copyProperties(user,userResponse);
-        return userResponse;
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
     }
 
-    public void updateUser(String id, UserRequest userRequest) {
-        User user = userRepository.findById(id).get();
-        BeanUtils.copyProperties(userRequest,user);
-//        Role role = (Role) userRepository.readById(Role.class, userRequest.getRoleId());
-//        User.updateFromUser(updateUser, user);
-//        updateUser.setUserRole(role);
-        userRepository.save(user);
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
-    public void deleteUser(String id) {
-        if (CommonUtils.getUserIdOfLoggedInUser().equals(id))
-            throw new ValidationException(HttpStatus.BAD_REQUEST.value(), "You cannot delete yourself");
+    public User updateUser(Long id, User user) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setPhoneNumber(user.getPhoneNumber());
+        existingUser.setRole(user.getRole());
+        existingUser.setGroups(user.getGroups());
+        existingUser.setGroupRoles(user.getGroupRoles());
+        existingUser.setLabels(user.getLabels());
+        return userRepository.save(existingUser);
+    }
 
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
-//    public Object getPaginatedUsers(UserPaginationRequest userPaginationRequest) {
-//        List response = new ArrayList();
-//        if (isSearchEnabled(userPaginationRequest)) {
-//            SearchRequest searchRequest = new SearchRequest();
-//            searchRequest.setTable(User.class);
-//            searchRequest.setMax(userPaginationRequest.getMax());
-//            searchRequest.setOffset(userPaginationRequest.getOffset());
-//
-//            HashMap<String, Object> queryParam = new HashMap<>();
-//            queryParam.put("firstName", userPaginationRequest.getFirstName());
-//            queryParam.put("lastName", userPaginationRequest.getLastName());
-//            searchRequest.setQueryParams(queryParam);
-//
-//            response = userRepository.searchWithFilter(searchRequest);
-//        }
-//
-//        return response;
-//    }
-
-//    private boolean isSearchEnabled(UserPaginationRequest userPaginationRequest) {
-//        return Objects.nonNull(userPaginationRequest.getFirstName()) || Objects.nonNull(userPaginationRequest.getLastName());
-//    }
 }

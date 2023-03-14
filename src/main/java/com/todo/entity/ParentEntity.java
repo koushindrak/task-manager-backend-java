@@ -1,22 +1,28 @@
 package com.todo.entity;
 
 import com.todo.constants.CommonConstants;
+import com.todo.context.ExecutionContext;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @MappedSuperclass
+@Data
 public class ParentEntity {
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String createdBy = CommonConstants.EMPTY_STRING;
 
     @Column
     private String updatedBy;
 
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
 
@@ -24,37 +30,13 @@ public class ParentEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    public String getCreatedBy() {
-        return createdBy;
+    @PrePersist
+    public void prePersist() {
+        this.setCreatedBy((Objects.isNull(ExecutionContext.get()) || Objects.isNull(ExecutionContext.get().getUsercontext().getId())) ? "SYSTEM" : ExecutionContext.get().getUsercontext().getId());
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    @PreUpdate
+    public void preUpdate() {
+        this.setUpdatedBy((Objects.isNull(ExecutionContext.get()) || Objects.isNull(ExecutionContext.get().getUsercontext().getId())) ? "SYSTEM" : ExecutionContext.get().getUsercontext().getId());
     }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-
 }

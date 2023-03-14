@@ -1,6 +1,6 @@
 package com.todo.exceptions;
 
-import com.todo.dao.ResponseDTO;
+import com.todo.dto.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionInterceptor {
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = {ResourceNotFoundException.class})
+    @ResponseBody
+    public final ResponseDTO handleValidationExceptions(ResourceNotFoundException ex) {
+        return new ResponseDTO().exception(ex.getCode(), ex.getMessage());
+    }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {ValidationException.class})
