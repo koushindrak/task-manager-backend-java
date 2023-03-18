@@ -1,7 +1,7 @@
 FROM openjdk:19-jdk-slim
 
 ENV GRADLE_VERSION=8.0.1
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget unzip
 
 # Download and install Gradle
 RUN wget -q https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
