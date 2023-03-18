@@ -4,7 +4,6 @@ import com.todo.dao.ProjectRepository;
 import com.todo.dto.ProjectRequest;
 import com.todo.dto.ProjectResponse;
 import com.todo.entity.Project;
-import com.todo.entity.User;
 import com.todo.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ public class ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
 
     public List<ProjectResponse> getAllProjects() {
         List<Project> projects = projectRepository.findAll();
@@ -31,9 +31,9 @@ public class ProjectService {
         return new ProjectResponse(project);
     }
 
-    public ProjectResponse createProject(ProjectRequest projectRequest, User user) {
+    public ProjectResponse createProject(ProjectRequest projectRequest) {
         Project project = projectRequest.toProject(projectRequest);
-        project.setUser(user);
+//        project.setUser();
         project = projectRepository.save(project);
         return new ProjectResponse(project);
     }

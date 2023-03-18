@@ -1,6 +1,5 @@
 package com.todo.business;
 
-import com.todo.business.PriorityService;
 import com.todo.dao.PriorityRepository;
 import com.todo.dto.PriorityDto;
 import com.todo.entity.Priority;

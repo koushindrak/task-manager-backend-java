@@ -1,5 +1,6 @@
 package com.todo.entity;
 
+import com.todo.constants.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,7 +20,6 @@ public class UserGroupRole {
     @MapsId("groupId")
     private Group group;
 
-    @ManyToOne
     private Role role;
 
 }

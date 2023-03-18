@@ -1,60 +1,77 @@
 package com.todo.dto;
 
+import lombok.Data;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
-public class ResponseDTO {
-    private int code;
-    private String message;
-    private Object data;
+@Data
+public class ResponseDTO<T> {
 
-    public int getCode() {
-        return code;
+    @Data
+    public class SuccessResponse {
+        private String message;
+        private T data;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    @Data
+    public class Error {
+        private Integer errorCode;
+        private Integer httpStatus;
+        private String errorMessage;
+        private List<String> cause;
+        private String errorLogs;
     }
 
-    public String getMessage() {
-        return message;
+    public SuccessResponse created(T data, Class entity) {
+        String action = " Created ";
+        return getSuccessResponse(data, entity, action);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    private SuccessResponse getSuccessResponse(T data, Class entity, String action) {
+        SuccessResponse success = new SuccessResponse();
+        success.setData(data);
+        success.setMessage(entity.getSimpleName().toUpperCase() + action + "Successfully");
+        return success;
     }
 
-    public Object getData() {
-        return data;
+    public SuccessResponse retrieved(T data, Class entity) {
+        String action = " Retrieved ";
+        return getSuccessResponse(data, entity, action);
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public SuccessResponse updated(T data, Class entity) {
+        String action = " Updated ";
+        return getSuccessResponse(data, entity, action);
     }
 
-    public ResponseDTO ok(int code, Object data, String message) {
-        ResponseDTO responseDTO = new ResponseDTO();
-        responseDTO.setCode(code);
-        responseDTO.setData(data);
-        responseDTO.setMessage(message);
-        return responseDTO;
+    public SuccessResponse deleted(T data, Class entity) {
+        String action = " Deleted ";
+        return getSuccessResponse(data, entity, action);
     }
 
-    public ResponseDTO ok(String message) {
-        ResponseDTO responseDTO = new ResponseDTO();
-        responseDTO.setCode(200);
-        responseDTO.setData(new HashMap<>());
-        responseDTO.setMessage(message);
-        return responseDTO;
+    public Error failure(int errorCode, HttpStatus httpStatus, Exception e) {
+        Error error = new Error();
+        error.setErrorCode(errorCode);
+        error.setErrorMessage(e.getMessage());
+        error.setHttpStatus(httpStatus.value());
+
+        List<String> causes = new ArrayList<>();
+        int counter = 0;
+        Throwable throwable = e.getCause();
+        while (throwable != null && counter < 5) {
+            causes.add(throwable.getMessage());
+            throwable = throwable.getCause();
+            counter++;
+        }
+        error.setCause(causes);
+        error.setErrorLogs(Arrays.toString(e.getStackTrace()));
+        return error;
     }
 
-    public ResponseDTO exception(int code, String message) {
-        ResponseDTO responseDTO = new ResponseDTO();
-        responseDTO.setCode(code);
-        responseDTO.setMessage(message);
-        responseDTO.setData(new HashMap<>());
-        return responseDTO;
-    }
 }

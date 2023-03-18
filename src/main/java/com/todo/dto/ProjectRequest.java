@@ -1,7 +1,6 @@
 package com.todo.dto;
 
 import com.todo.entity.Project;
-import com.todo.entity.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -27,7 +26,7 @@ public class ProjectRequest {
 
     @NotNull
     private Long userId;
-    
+
     // getters and setters
     public Project toProject(ProjectRequest projectRequest) {
         Project project = new Project();
@@ -36,7 +35,7 @@ public class ProjectRequest {
         project.setStartDate(startDate);
         project.setEndDate(endDate);
         project.setStatus(status);
-       // project.setUser(user);
+        // project.setUser(user);
         return project;
     }
 }

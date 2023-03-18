@@ -16,13 +16,13 @@ import java.util.Objects;
 @MappedSuperclass
 @Data
 public class ParentEntity {
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     private String createdBy = CommonConstants.EMPTY_STRING;
 
     @Column
     private String updatedBy;
 
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
 

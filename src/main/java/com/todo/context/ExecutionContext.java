@@ -14,7 +14,7 @@ public class ExecutionContext {
     }
 
     public static ExecutionContext get() {
-        return (ExecutionContext)CONTEXT.get();
+        return CONTEXT.get();
     }
 
     public ExecutionContext(UserContext userContext) {

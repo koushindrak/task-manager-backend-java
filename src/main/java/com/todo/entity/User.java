@@ -1,19 +1,29 @@
 package com.todo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.todo.constants.CommonConstants;
-import com.todo.context.ExecutionContext;
+import com.todo.constants.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
+import java.util.List;
 import java.util.Set;
 
-@Entity(name = "User")
-@Table(name = "user")
 @Data
-public class User extends ParentEntity {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "user")
+public class User extends ParentEntity implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,21 +42,63 @@ public class User extends ParentEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    //relationships
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "role_id")
-    private Role role;
+//    //relationships
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+//    @JoinColumn(name = "role_id")
+//    private Role role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonIgnore
-    private LoginDetails loginDetails;
-
-    @ManyToMany(mappedBy = "members")
-    private Set<Group> groups = new HashSet<>();
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    @JsonIgnore
+//    private LoginDetails loginDetails;
 
     @OneToMany(mappedBy = "user")
     private Set<UserGroupRole> groupRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
     private Set<Label> labels = new HashSet<>();
+
+
+
+
+    // -------
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

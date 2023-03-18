@@ -4,7 +4,6 @@ import com.todo.business.ProjectService;
 import com.todo.dto.ProjectRequest;
 import com.todo.dto.ProjectResponse;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,11 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
 
-    @Autowired
-    private ProjectService projectService;
+    private final ProjectService projectService;
+
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @GetMapping
     public ResponseEntity<List<ProjectResponse>> getAllProjects() {
@@ -33,7 +35,7 @@ public class ProjectController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ProjectResponse> createProject(@RequestBody @Valid ProjectRequest projectRequest) {
-//        ProjectResponse project = projectService.createProject(projectRequest);
+        ProjectResponse project = projectService.createProject(projectRequest);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
