@@ -10,10 +10,9 @@ COPY build.gradle gradlew gradlew.bat my-links settings.gradle ./
 COPY src ./src
 
 # Set permissions for gradlew
-RUN chmod +x gradlew
 
 # Build the application
-RUN ./gradlew build
+RUN gradle clean build
 
 # Expose the port on which the application will run
 EXPOSE 8080
