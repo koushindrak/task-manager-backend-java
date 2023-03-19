@@ -32,5 +32,5 @@ RUN gradle clean build --warning-mode=none
 EXPOSE 8080
 
 # Start the application
-CMD ["java", "-jar", "build/libs/*.jar"]
+CMD ["java", "-jar", "build/libs/todolist-backend-0.0.1-SNAPSHOT.jar"]
 
