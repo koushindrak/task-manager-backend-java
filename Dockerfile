@@ -32,5 +32,5 @@ RUN gradle clean build --warning-mode=none
 EXPOSE 8080
 
 # Start the application
-CMD ["java", "-jar", "build/target/*.jar"]
+CMD ["java", "-jar", "build/libs/*.jar"]
 
