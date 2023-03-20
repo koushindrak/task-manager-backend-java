@@ -1,23 +1,21 @@
 package com.todo.exceptions;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class ResourceNotFoundException extends RuntimeException {
-    private int code;
+    private Integer code;
     private String message;
     private Object stackTace;
 
-
-    public ResourceNotFoundException(String message) {
-        super(message);
+    public ResourceNotFoundException(int code, String message){
+        this.code = code;
+        this.message = message;
     }
 
-    public ResourceNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public ResourceNotFoundException(Throwable cause) {
-        super(cause);
+    public ResourceNotFoundException(String message){
+        this.message = message;
     }
 }

@@ -22,8 +22,8 @@ public class Label extends ParentEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
-    private Set<Task> task;
+    @ManyToMany
+    private Set<Task> tasks;
 
     // getters and setters
 }

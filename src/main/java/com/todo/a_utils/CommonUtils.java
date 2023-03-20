@@ -1,4 +1,4 @@
-package com.todo.utils;
+package com.todo.a_utils;
 
 import com.todo.context.ExecutionContext;
 
@@ -14,11 +14,11 @@ public class CommonUtils {
         return Calendar.getInstance().getTimeInMillis();
     }
 
-    public static String getRoleIdOfLoggedInUser() {
-        return ExecutionContext.get().getUsercontext().getRoleId();
+    public static Long getRoleIdOfLoggedInUser() {
+        return ExecutionContext.get().getUsercontext().roleId();
     }
 
-    public static String getUserIdOfLoggedInUser() {
-        return ExecutionContext.get().getUsercontext().getId();
+    public static Long getUserIdOfLoggedInUser() {
+        return ExecutionContext.get().getUsercontext().id();
     }
 }

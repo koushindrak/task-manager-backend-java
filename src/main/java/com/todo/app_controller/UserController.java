@@ -7,20 +7,17 @@ import com.todo.dto.UserRequest;
 import com.todo.entity.User;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
     private final ResponseDTO responseDTO;
-
-    public UserController(UserService userService, ResponseDTO responseDTO) {
-        this.userService = userService;
-        this.responseDTO = responseDTO;
-    }
 
     @PostMapping
     public SuccessResponse createUser(@Valid @RequestBody UserRequest userRequest) {
@@ -36,7 +33,6 @@ public class UserController {
     public SuccessResponse getUserById(@PathVariable("id") @Parameter(description = "User ID", example = "1") Long id) {
         return responseDTO.retrieved(userService.getUserById(id), User.class);
     }
-
 
     @PutMapping("/{id}")
     public SuccessResponse updateUser(@PathVariable("id") Long id,

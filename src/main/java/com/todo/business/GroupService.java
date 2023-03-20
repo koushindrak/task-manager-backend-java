@@ -1,5 +1,6 @@
 package com.todo.business;
 
+import com.todo.a_utils.GroupUtils;
 import com.todo.dao.GroupRepository;
 import com.todo.dto.GroupRequest;
 import com.todo.dto.GroupResponse;
@@ -27,18 +28,18 @@ public class GroupService {
 
     public GroupResponse getGroupById(Long id) {
         Group group = groupRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Group not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException(101,"Group not found with id " + id));
         return new GroupResponse(group);
     }
 
     public GroupResponse createGroup(GroupRequest groupRequest) {
-        Group group = groupRequest.toGroup();
+        Group group = GroupUtils.toGroup(groupRequest);
         group = groupRepository.save(group);
         return new GroupResponse(group);
     }
 
-    public GroupResponse updateGroup(Long id, GroupRequest groupRequest) {
-        Group group = groupRequest.toGroup();
+    public GroupResponse updateGroup(Long id, GroupRequest updateRequest) {
+        Group group = GroupUtils.toGroup(updateRequest);
         group.setId(id);
         group = groupRepository.save(group);
         return new GroupResponse(group);

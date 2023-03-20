@@ -4,7 +4,7 @@ import com.todo.business.GroupService;
 import com.todo.dto.GroupRequest;
 import com.todo.dto.GroupResponse;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/groups")
+@AllArgsConstructor
 public class GroupController {
 
-    @Autowired
-    private GroupService groupService;
+    private final GroupService groupService;
+
+    @PostMapping
+    public ResponseEntity<GroupResponse> createGroup(@RequestBody @Valid GroupRequest groupRequest) {
+        GroupResponse group = groupService.createGroup(groupRequest);
+        return new ResponseEntity<>(group, HttpStatus.CREATED);
+    }
 
     @GetMapping
     public ResponseEntity<List<GroupResponse>> getAllGroups() {
@@ -28,12 +34,6 @@ public class GroupController {
     public ResponseEntity<GroupResponse> getGroupById(@PathVariable Long id) {
         GroupResponse group = groupService.getGroupById(id);
         return new ResponseEntity<>(group, HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<GroupResponse> createGroup(@RequestBody @Valid GroupRequest groupRequest) {
-        GroupResponse group = groupService.createGroup(groupRequest);
-        return new ResponseEntity<>(group, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")

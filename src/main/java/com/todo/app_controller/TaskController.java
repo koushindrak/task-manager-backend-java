@@ -7,20 +7,17 @@ import com.todo.dto.TaskRequest;
 import com.todo.entity.Task;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tasks")
+@AllArgsConstructor
 public class TaskController {
 
     private final TaskService taskService;
 
     private final ResponseDTO responseDTO;
-
-    public TaskController(TaskService taskService, ResponseDTO responseDTO) {
-        this.taskService = taskService;
-        this.responseDTO = responseDTO;
-    }
 
     @PostMapping
     public SuccessResponse createTask(@Valid @RequestBody TaskRequest taskRequest) {
@@ -46,4 +43,5 @@ public class TaskController {
     public SuccessResponse deleteTask(@PathVariable("id") @Parameter(description = "Task ID", example = "1") Long id) {
         return responseDTO.deleted(taskService.deleteTask(id), Task.class);
     }
+
 }

@@ -15,9 +15,4 @@ public class ProjectResponse {
     private Date endDate;
     private String status;
     private Long userId;
-
-    public ProjectResponse(Project project) {
-        BeanUtils.copyProperties(project, this);
-//        this.userId = project.getUser().getId();
-    }
 }

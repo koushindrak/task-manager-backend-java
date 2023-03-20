@@ -29,6 +29,4 @@ public class Project extends ParentEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    // getters and setters
 }

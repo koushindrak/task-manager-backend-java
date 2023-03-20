@@ -1,9 +1,14 @@
 package com.todo.entity;
 
+import com.todo.constants.Priority;
+import com.todo.constants.TaskFrequency;
+import com.todo.constants.TaskStatus;
+import com.todo.constants.TaskType;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
@@ -20,15 +25,23 @@ public class Task extends ParentEntity {
 
     @Column(name = "due_date")
     private Date dueDate;
+//TODO:- enhancement for recurring tasks
+//    private TaskType taskType;
+//
+//    private TaskFrequency taskFrequency;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private TaskStatus taskStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    private Label label;
+    @ManyToMany
+    private Set<Label> labels;
 
-    @ManyToOne
+    @Column(name = "priority")
     private Priority priority;
-    // getters and setters
+
 }

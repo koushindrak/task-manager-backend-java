@@ -1,11 +1,14 @@
 package com.todo.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.todo.entity.Label;
 import com.todo.entity.Task;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class TaskResponse {
@@ -19,21 +22,7 @@ public class TaskResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
 
-    private Long userId;
+    private List<TaskLabelResponse> labels;
 
-    private String userName;
-
-    private Long labelId;
-
-    private String labelName;
-
-    private Long priorityId;
-
-    private String priorityName;
-
-    public TaskResponse(Task task) {
-        BeanUtils.copyProperties(task, this);
-    }
-
-    // constructors, getters and setters
+    private String priority;
 }

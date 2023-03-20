@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class TaskRequest {
@@ -20,13 +21,11 @@ public class TaskRequest {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
 
-    private Long userId;
-
     private Long groupId;
 
-    private Long labelId;
+    private List<Long> labelIds;
 
-    private Long priorityId;
+    private String priority;
 
-    // getters and setters
+    private String status;
 }

@@ -16,6 +16,7 @@ import java.util.Objects;
 @MappedSuperclass
 @Data
 public class ParentEntity {
+
     @Column(nullable = false, updatable = false)
     private String createdBy = CommonConstants.EMPTY_STRING;
 
@@ -32,11 +33,15 @@ public class ParentEntity {
 
     @PrePersist
     public void prePersist() {
-        this.setCreatedBy((Objects.isNull(ExecutionContext.get()) || Objects.isNull(ExecutionContext.get().getUsercontext().getId())) ? "SYSTEM" : ExecutionContext.get().getUsercontext().getId());
+        this.setCreatedBy((Objects.isNull(ExecutionContext.get()) ||
+                Objects.isNull(ExecutionContext.get().getUsercontext().id())) ?
+                "SYSTEM" : ExecutionContext.get().getUsercontext().id().toString());
     }
 
     @PreUpdate
     public void preUpdate() {
-        this.setUpdatedBy((Objects.isNull(ExecutionContext.get()) || Objects.isNull(ExecutionContext.get().getUsercontext().getId())) ? "SYSTEM" : ExecutionContext.get().getUsercontext().getId());
+        this.setUpdatedBy((Objects.isNull(ExecutionContext.get()) ||
+                Objects.isNull(ExecutionContext.get().getUsercontext().id())) ?
+                "SYSTEM" : ExecutionContext.get().getUsercontext().id().toString());
     }
 }

@@ -20,7 +20,7 @@ public class ResponseDTO<T> {
     }
 
     @Data
-    public class Error {
+    public  class Error {
         private Integer errorCode;
         private Integer httpStatus;
         private String errorMessage;
@@ -31,13 +31,6 @@ public class ResponseDTO<T> {
     public SuccessResponse created(T data, Class entity) {
         String action = " Created ";
         return getSuccessResponse(data, entity, action);
-    }
-
-    private SuccessResponse getSuccessResponse(T data, Class entity, String action) {
-        SuccessResponse success = new SuccessResponse();
-        success.setData(data);
-        success.setMessage(entity.getSimpleName().toUpperCase() + action + "Successfully");
-        return success;
     }
 
     public SuccessResponse retrieved(T data, Class entity) {
@@ -53,6 +46,14 @@ public class ResponseDTO<T> {
     public SuccessResponse deleted(T data, Class entity) {
         String action = " Deleted ";
         return getSuccessResponse(data, entity, action);
+    }
+
+
+    private SuccessResponse getSuccessResponse(T data, Class entity, String action) {
+        SuccessResponse success = new SuccessResponse();
+        success.setData(data);
+        success.setMessage(entity.getSimpleName().toUpperCase() + action + "Successfully");
+        return success;
     }
 
     public Error failure(int errorCode, HttpStatus httpStatus, Exception e) {
