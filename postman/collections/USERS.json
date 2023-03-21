@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "854586e9-38eb-4f46-a57c-853a432185bc",
+		"name": "USERS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "21082348-854586e9-38eb-4f46-a57c-853a432185bc"
+	},
+	"item": [
+		{
+			"name": "1-GET-ALL-USERS",
+			"id": "e683c422-b8d6-42f4-ac58-49e233d55393",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2612/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2612",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE USER BY ID",
+			"id": "a0de2bb1-4230-4126-99d6-b6d401710bcf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2612/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2612",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER BY ID",
+			"id": "fa485da5-1b3d-4371-b285-a5d7d0ae7ab6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2612/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2612",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE USER BY ID",
+			"id": "2cff1e41-94c1-4f77-af19-462dd984fc88",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phoneNumber\": \"string\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2612/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2612",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
