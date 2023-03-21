@@ -1,5 +1,6 @@
 package com.todo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.todo.constants.Priority;
 import com.todo.constants.TaskFrequency;
 import com.todo.constants.TaskStatus;
@@ -36,6 +37,7 @@ public class Task extends ParentEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToMany

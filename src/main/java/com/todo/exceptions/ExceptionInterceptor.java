@@ -25,8 +25,8 @@ public class ExceptionInterceptor {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = {ResourceNotFoundException.class})
     @ResponseBody
-    public final ResponseDTO handleValidationExceptions(ResourceNotFoundException ex) {
-        return new ResponseDTO();
+    public final ResponseDTO.Error handleValidationExceptions(ResourceNotFoundException ex) {
+        return new ResponseDTO().failure(ErrorCode.INVALID_INPUT_GIVEN,HttpStatus.BAD_REQUEST,ex);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

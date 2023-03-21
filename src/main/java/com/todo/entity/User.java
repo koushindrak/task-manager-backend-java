@@ -3,10 +3,7 @@ package com.todo.entity;
 import com.todo.constants.CommonConstants;
 import com.todo.constants.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,12 +13,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
+@Setter
+@Getter
 public class User extends ParentEntity implements UserDetails {
 
     @Id
@@ -51,13 +49,11 @@ public class User extends ParentEntity implements UserDetails {
 //    @JsonIgnore
 //    private LoginDetails loginDetails;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<UserGroupRole> groupRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
     private Set<Label> labels = new HashSet<>();
-
-
 
 
     // -------
@@ -101,4 +97,5 @@ public class User extends ParentEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

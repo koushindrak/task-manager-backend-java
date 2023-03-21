@@ -5,6 +5,7 @@ import com.todo.dto.LabelRequest;
 import com.todo.dto.LabelResponse;
 import com.todo.dto.ResponseDTO;
 import com.todo.dto.ResponseDTO.SuccessResponse;
+import com.todo.entity.Label;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,8 @@ public class LabelController {
     @ResponseStatus(HttpStatus.CREATED)
     public SuccessResponse createLabel(@RequestBody @Valid LabelRequest labelRequest) {
         LabelResponse label = labelService.createLabel(labelRequest);
-        return new ResponseDTO().created(label, LabelResponse.class);
+        SuccessResponse successResponse = new ResponseDTO().created(label, LabelResponse.class);
+        return successResponse;
     }
 
 
@@ -51,7 +53,6 @@ public class LabelController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public SuccessResponse deleteLabel(@PathVariable Long id) {
-        labelService.deleteLabel(id);
-        return new ResponseDTO().deleted(new Object(), LabelResponse.class);
+       return new ResponseDTO().deleted(labelService.deleteLabel(id), Label.class);
     }
 }

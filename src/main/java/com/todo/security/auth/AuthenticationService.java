@@ -2,12 +2,14 @@ package com.todo.security.auth;
 
 import com.todo.dao.UserRepository;
 import com.todo.entity.User;
+import com.todo.exceptions.ResourceNotFoundException;
 import com.todo.security.config.JwtService;
 import com.todo.entity.Token;
 import com.todo.security.token.TokenRepository;
 import com.todo.security.token.TokenType;
 import com.todo.constants.Role;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
   private final UserRepository repository;
   private final TokenRepository tokenRepository;
@@ -22,7 +25,7 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
-  public AuthenticationResponse register(RegisterRequest request) {
+  public void register(RegisterRequest request) {
     var user = User.builder()
         .firstName(request.getFirstname())
         .lastName(request.getLastname())
@@ -31,14 +34,15 @@ public class AuthenticationService {
         .role(Role.USER)
         .build();
     var savedUser = repository.save(user);
-    var jwtToken = jwtService.generateToken(user);
-    saveUserToken(savedUser, jwtToken);
-    return AuthenticationResponse.builder()
-        .token(jwtToken)
-        .build();
+   // var jwtToken = jwtService.generateToken(user);
+    //saveUserToken(savedUser, jwtToken);
+//    return AuthenticationResponse.builder()
+//        .token(jwtToken)
+//        .build();
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    log.info("Authenticating user");
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             request.getEmail(),
@@ -46,10 +50,14 @@ public class AuthenticationService {
         )
     );
     var user = repository.findByEmail(request.getEmail())
-        .orElseThrow();
+        .orElseThrow(()-> new ResourceNotFoundException("Invalid User email"));
+    log.info("User found with email-"+request.getEmail());
     var jwtToken = jwtService.generateToken(user);
+    log.info("revoking old token for user");
     revokeAllUserTokens(user);
+    log.info("Saving user token");
     saveUserToken(user, jwtToken);
+    log.info("... Building jwt token");
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();

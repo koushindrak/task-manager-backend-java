@@ -1,5 +1,7 @@
 package com.todo.security.auth;
 
+import com.todo.dto.ResponseDTO;
+import com.todo.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,13 @@ public class AuthenticationController {
   private final AuthenticationService service;
 
   @PostMapping("/signup")
-  public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
-    return ResponseEntity.ok(service.register(request));
+  public ResponseDTO.SuccessResponse register(@Valid @RequestBody RegisterRequest request) {
+    service.register(request);
+    return new ResponseDTO().created("User Registered Successfull!!!", User.class);
   }
   @PostMapping("/signin")
-  public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
-    return ResponseEntity.ok(service.authenticate(request));
+  public ResponseDTO.SuccessResponse authenticate(@Valid @RequestBody AuthenticationRequest request) {
+    return new ResponseDTO().retrieved(service.authenticate(request), User.class);
   }
 
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class HeaderConfig {
+public class SwaggerHeaderConfig {
     @Bean
     public OpenAPI customOpenAPI(@Value("title") String serviceTitle, @Value("versionnnn") String serviceVersion) {
 

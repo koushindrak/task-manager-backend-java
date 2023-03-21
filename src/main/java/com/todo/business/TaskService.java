@@ -1,5 +1,7 @@
 package com.todo.business;
 
+import com.todo.a_utils.CommonUtils;
+import com.todo.context.ExecutionContext;
 import com.todo.dao.TaskRepository;
 import com.todo.dto.TaskRequest;
 import com.todo.dto.TaskResponse;
@@ -20,31 +22,34 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final TaskUtils taskUtils;
+    private final CommonUtils commonUtils;
 
     public Task createTask(TaskRequest taskRequest) {
         Task task = new Task();
+        task.setUser(commonUtils.getCurrentUser());
         return taskUtils.saveOrUpdateTask(taskRequest, task);
     }
     public List<TaskResponse> getTasks() {
-        List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks = taskRepository.getTaskByUser_Id(CommonUtils.getLoggedInUserId());
         return tasks.stream().map(task -> TaskUtils.toTaskResponse(task)).collect(Collectors.toList());
     }
 
     public TaskResponse getTaskById(Long id) {
-        Task task = taskRepository.findById(id)
+        Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
         return TaskUtils.toTaskResponse(task);
     }
 
     public Task updateTask(Long id, TaskRequest taskRequest) {
-        Task task = taskRepository.findById(id)
+        Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
         return taskUtils.saveOrUpdateTask(taskRequest, task);
     }
 
     public TaskResponse deleteTask(Long id) {
-        TaskResponse task = getTaskById(id);
-        taskRepository.deleteById(id);
-        return task;
+        Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+                .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
+        taskRepository.delete(task);
+        return TaskUtils.toTaskResponse(task);
     }
 }

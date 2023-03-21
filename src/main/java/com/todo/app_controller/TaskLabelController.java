@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("task-label")
+@RestController
+@RequestMapping("/task-label")
 @AllArgsConstructor
 public class TaskLabelController {
 
