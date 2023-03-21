@@ -28,13 +28,13 @@ public class TaskLabelController {
         taskLabelService.removeLabelFromTask(taskLabelRequest);
         return new ResponseDTO().updated("Label Removed from task ", Task.class);
     }
-    @GetMapping
+    @GetMapping("/task-by-label")
     public ResponseDTO.SuccessResponse getTaskByLabel(@RequestParam Long labelId){
         List<TaskResponse> taskResponses = taskLabelService.getTasksByLabel(labelId);
         return new ResponseDTO().retrieved(taskResponses,Task.class);
     }
 
-    @GetMapping
+    @GetMapping("/label-by-task")
     public ResponseDTO.SuccessResponse getLabelsByTask(@RequestParam Long taskId){
         List<LabelResponse> labelResponses = taskLabelService.getLabelsByTask(taskId);
         return new ResponseDTO().retrieved(labelResponses,Task.class);
