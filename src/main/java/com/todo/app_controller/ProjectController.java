@@ -49,9 +49,8 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
     public SuccessResponse deleteProject(@PathVariable Long id) {
-        projectService.deleteProject(id);
-        return new ResponseDTO().deleted(new Object(), ProjectResponse.class);
+        return new ResponseDTO().deleted(projectService.deleteProject(id), ProjectResponse.class);
     }
 }

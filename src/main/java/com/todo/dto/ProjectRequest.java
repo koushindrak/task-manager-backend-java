@@ -21,6 +21,5 @@ public class ProjectRequest {
     @NotNull
     private Date endDate;
 
-    @NotBlank
-    private ProjectStatus status;
+    private ProjectStatus status = ProjectStatus.ACTIVE;
 }

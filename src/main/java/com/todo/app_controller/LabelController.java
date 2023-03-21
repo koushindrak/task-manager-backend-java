@@ -51,7 +51,7 @@ public class LabelController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
     public SuccessResponse deleteLabel(@PathVariable Long id) {
        return new ResponseDTO().deleted(labelService.deleteLabel(id), Label.class);
     }
