@@ -9,6 +9,7 @@ import com.todo.entity.Label;
 import com.todo.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class LabelService {
 
     private final LabelRepository labelRepository;
@@ -33,6 +35,8 @@ public class LabelService {
 
     public List<LabelResponse> getAllLabels() {
         List<Label> labels = labelRepository.findAllByUser_Id(CommonUtils.getLoggedInUserId());
+        labels.forEach(label -> log.info("labelid-"+label.getId()+" Tasks are--"+label.getTasks()));
+
         return labels.stream()
                 .map(label ->  labelUtils.toLabelResponse(label))
                 .collect(Collectors.toList());

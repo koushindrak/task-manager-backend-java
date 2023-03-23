@@ -11,6 +11,7 @@ import com.todo.dto.TaskResponse;
 import com.todo.entity.Label;
 import com.todo.entity.Task;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -20,6 +21,7 @@ import java.util.*;
 
 @Component
 @Data
+@Slf4j
 public class TaskUtils {
 
     private final TaskRepository taskRepository;
@@ -30,7 +32,7 @@ public class TaskUtils {
         TaskResponse taskResponse = new TaskResponse();
         BeanUtils.copyProperties(task, taskResponse);
         List<TaskLabelResponse> labels = new ArrayList<>();
-
+        log.info("Labels for task id "+task.getId()+" are-"+task.getLabels());
         task.getLabels().forEach(label -> {
             TaskLabelResponse taskLabelResponse = new TaskLabelResponse();
             taskLabelResponse.setLabelId(label.getId());

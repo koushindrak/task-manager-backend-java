@@ -21,8 +21,8 @@ public class JwtService {
   @Value("${jwtSecret}")
   private String jwtSecret;
 
-  @Value("${jwtExpirationMs}")
-  private int jwtExpirationMs;
+  @Value("${jwtExpirationHrs}")
+  private int jwtExpirationHrs;
 
   private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
@@ -45,11 +45,14 @@ public class JwtService {
         .setClaims(extraClaims)
         .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+            .setExpiration(new Date((new Date()).getTime() + convertHrsToMs(jwtExpirationHrs)))
         .signWith(getSignInKey(), SignatureAlgorithm.HS256)
         .compact();
   }
 
+  public static long convertHrsToMs(long jwtExpirationHrs){
+    return jwtExpirationHrs * 60 * 60 * 1000;
+  }
   public boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
     try {

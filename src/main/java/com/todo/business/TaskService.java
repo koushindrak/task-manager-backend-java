@@ -30,7 +30,7 @@ public class TaskService {
         return taskUtils.saveOrUpdateTask(taskRequest, task);
     }
     public List<TaskResponse> getTasks() {
-        List<Task> tasks = taskRepository.getTaskByUser_Id(CommonUtils.getLoggedInUserId());
+        List<Task> tasks = taskRepository.findAllByUser_Id(CommonUtils.getLoggedInUserId());
         return tasks.stream().map(task -> TaskUtils.toTaskResponse(task)).collect(Collectors.toList());
     }
 

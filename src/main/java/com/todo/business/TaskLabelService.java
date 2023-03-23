@@ -31,7 +31,7 @@ public class TaskLabelService {
     }
 
     public List<TaskResponse> getTasksByLabel(Long labelId) {
-        List<Task> tasks = taskRepository.findAllByLabels(labelId);
+        List<Task> tasks = taskRepository.findTaskByLabelId(labelId);
         List<TaskResponse> taskResponses = tasks.stream().map(TaskUtils::toTaskResponse).collect(Collectors.toList());
         return taskResponses;
     }
