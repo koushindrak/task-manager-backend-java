@@ -33,7 +33,6 @@ public class Group extends ParentEntity {
     @ManyToMany(mappedBy = "groups") // ignore tables starting with groups i.e groups_members, just create members_groups
     private Set<User> members = new HashSet<>();
 
-
     @OneToMany(mappedBy = "group")
     private Set<Task> tasks;
 }

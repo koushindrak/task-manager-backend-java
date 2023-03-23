@@ -60,6 +60,9 @@ public class User extends ParentEntity implements UserDetails {
     @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in tasks table
     private Set<Task> tasks;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Project> projects;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

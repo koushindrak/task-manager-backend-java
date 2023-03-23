@@ -30,4 +30,11 @@ public class Notification {
     @JoinColumn(name = "task_id")
     private Task task;
 
+    // unidirectional mapping
+    @OneToOne
+    private User user;
+
+    // unidirectional mapping
+    @OneToOne
+    private Group group;
 }
