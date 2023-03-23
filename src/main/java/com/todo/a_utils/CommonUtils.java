@@ -35,7 +35,7 @@ public class CommonUtils {
 
     public User getCurrentUser(){
         User user= userRepository.findByEmail(ExecutionContext.get().getUsercontext().email()).get();
-        user.setGroupRoles(null);
+//        user.setGroupRoles(null);
         return user;
     }
 }

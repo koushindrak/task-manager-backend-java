@@ -56,7 +56,7 @@ public class GroupService {
         User member = new User();
         member.setId(memberId);
 
-        group.getMembers().add(member);
+//        group.getMembers().add(member);
         groupRepository.save(group);
     }
 
@@ -67,7 +67,7 @@ public class GroupService {
         User member = new User();
         member.setId(memberId);
 
-        group.getMembers().remove(member);
+//        group.getMembers().remove(member);
         groupRepository.save(group);
     }
 

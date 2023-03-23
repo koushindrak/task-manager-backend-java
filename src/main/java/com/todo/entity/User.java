@@ -3,6 +3,7 @@ package com.todo.entity;
 import com.todo.constants.CommonConstants;
 import com.todo.constants.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,50 +19,46 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@Setter
-@Getter
+@Data
 public class User extends ParentEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name",length = 50)
+    @Size(min = 3,max = 50)
     private String firstName;
 
-    @Column(name = "second_name")
+    @Column(name = "last_name",length = 50)
     private String lastName = CommonConstants.EMPTY_STRING;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true,length = 100)
     private String email;
 
+    @Column(nullable = false,length = 16)
+    @Size(min = 8,max = 16)
     private String password;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number",length = 12)
     private String phoneNumber;
 
-//    //relationships
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-//    @JoinColumn(name = "role_id")
-//    private Role role;
-
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    @JsonIgnore
-//    private LoginDetails loginDetails;
-
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    private Set<UserGroupRole> groupRoles = new HashSet<>();
-
-    @OneToMany(mappedBy = "user")
-    private Set<Label> labels = new HashSet<>();
-
-
-    // -------
     @Enumerated(EnumType.STRING)
+    @Column(name = "role",columnDefinition = "ENUM('ADMIN', 'USER')")
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Token> tokens;
+    /// mapping-   users-groups==> M2M, user-labels==> 12M, user-tokens==> 12M
+    @ManyToMany // will be having users_groups table
+    private Set<Group> groups;
+
+    @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in label table
+    private Set<Label> labels = new HashSet<>();
+
+    @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in login_details table
+    private List<LoginDetails> tokens;
+
+    @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in tasks table
+    private Set<Task> tasks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

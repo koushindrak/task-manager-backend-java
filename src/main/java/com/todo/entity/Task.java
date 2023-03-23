@@ -22,19 +22,25 @@ public class Task extends ParentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50,nullable = false)
     private String name;
 
+    @Column
     private String description;
 
     @Column(name = "due_date")
     private Date dueDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="status")
+    @Column(name = "status",columnDefinition = "ENUM('TODO', 'INPROGRESS','DONE')")
     private TaskStatus taskStatus;
 
+    @Column(name = "priority",columnDefinition = "ENUM('HIGH', 'LOW','MEDIUM')")
+    private Priority priority;
+
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
@@ -42,7 +48,22 @@ public class Task extends ParentEntity {
     @JsonIgnoreProperties("tasks")
     private Set<Label> labels;
 
-    @Column(name = "priority")
-    private Priority priority;
+    @ManyToOne
+    private Group group;
 
+    @OneToMany(mappedBy = "task")
+    private Set<Notification> notifications;
+
+    @OneToMany(mappedBy = "task")
+    private Set<Comments> comments;
+
+    @ManyToOne
+    private Project project;
 }
+
+
+
+
+
+
+

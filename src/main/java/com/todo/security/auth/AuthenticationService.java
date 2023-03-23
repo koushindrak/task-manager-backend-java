@@ -4,7 +4,7 @@ import com.todo.dao.UserRepository;
 import com.todo.entity.User;
 import com.todo.exceptions.ResourceNotFoundException;
 import com.todo.security.config.JwtService;
-import com.todo.entity.Token;
+import com.todo.entity.LoginDetails;
 import com.todo.security.token.TokenRepository;
 import com.todo.security.token.TokenType;
 import com.todo.constants.Role;
@@ -64,7 +64,7 @@ public class AuthenticationService {
   }
 
   private void saveUserToken(User user, String jwtToken) {
-    var token = Token.builder()
+    var token = LoginDetails.builder()
         .user(user)
         .token(jwtToken)
         .tokenType(TokenType.BEARER)

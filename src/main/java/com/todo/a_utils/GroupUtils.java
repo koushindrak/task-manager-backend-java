@@ -17,7 +17,7 @@ public class GroupUtils {
     public static Group toGroup(GroupRequest request) {
         Group group = new Group();
         BeanUtils.copyProperties(request,group);
-        group.setOwner(ExecutionContext.get().getUsercontext().id());
+//        group.setOwner(ExecutionContext.get().getUsercontext().id());
         return group;
     }
 
