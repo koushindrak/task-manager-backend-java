@@ -35,16 +35,17 @@ public class Task extends ParentEntity {
     @Column(name = "status",columnDefinition = "ENUM('TODO', 'INPROGRESS','DONE')")
     private TaskStatus taskStatus;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "priority",columnDefinition = "ENUM('HIGH', 'LOW','MEDIUM')")
     private Priority priority;
 
 
     @ManyToOne
 //    @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JsonIgnoreProperties("tasks")
     private User user;
 
-    @ManyToMany(mappedBy = "tasks", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tasks", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("tasks")
     private Set<Label> labels;
 
@@ -59,6 +60,19 @@ public class Task extends ParentEntity {
 
     @ManyToOne
     private Project project;
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                ", taskStatus=" + taskStatus +
+                ", priority=" + priority +
+                ", labels=" + labels +
+                '}';
+    }
 }
 
 

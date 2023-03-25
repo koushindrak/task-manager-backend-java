@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,8 +20,8 @@ public class TaskResponse {
 
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate dueDate;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date dueDate;
 
     private List<TaskLabelResponse> labels;
 

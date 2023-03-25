@@ -10,6 +10,7 @@ import com.todo.a_utils.TaskUtils;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,16 +19,20 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @Data
+@Slf4j
 public class TaskService {
 
     private final TaskRepository taskRepository;
     private final TaskUtils taskUtils;
     private final CommonUtils commonUtils;
 
-    public Task createTask(TaskRequest taskRequest) {
+    public TaskResponse createTask(TaskRequest taskRequest) {
         Task task = new Task();
         task.setUser(commonUtils.getCurrentUser());
-        return taskUtils.saveOrUpdateTask(taskRequest, task);
+        task = taskUtils.saveOrUpdateTask(taskRequest, task);
+        CommonUtils.printJson(task);
+
+        return TaskUtils.toTaskResponse(task);
     }
     public List<TaskResponse> getTasks() {
         List<Task> tasks = taskRepository.findAllByUser_Id(CommonUtils.getLoggedInUserId());

@@ -31,13 +31,13 @@ public class TaskLabelService {
     }
 
     public List<TaskResponse> getTasksByLabel(Long labelId) {
-        List<Task> tasks = taskRepository.findTaskByLabelId(labelId);
+        List<Task> tasks = taskRepository.findTaskByLabels_Id(labelId);
         List<TaskResponse> taskResponses = tasks.stream().map(TaskUtils::toTaskResponse).collect(Collectors.toList());
         return taskResponses;
     }
 
     public List<LabelResponse> getLabelsByTask(Long taskId) {
-        List<Label> labels = labelRepository.findAllByTasks(taskId);
+        List<Label> labels = labelRepository.findAllByTasks_Id(taskId);
         List<LabelResponse> labelResponses = labels.stream().map(LabelUtils::toLabelResponse).collect(Collectors.toList());
         return labelResponses;
     }

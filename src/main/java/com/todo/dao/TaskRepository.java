@@ -15,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
      List<Task> findAllByUser_Id(Long userId);
-
      Optional<Task> getTaskByIdAndUser_Id(Long taskId, Long userId);
 
     @Modifying
@@ -30,4 +29,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query("SELECT t FROM Task t JOIN t.labels l WHERE l.id = :labelId")
     List<Task> findTaskByLabelId(@Param("labelId") Long labelId);
+
+    List<Task> findTaskByLabels_Id(Long labelId);
 }

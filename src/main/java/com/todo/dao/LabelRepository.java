@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface LabelRepository extends JpaRepository<Label, Long> {
 
-    List<Label> findAllByTasks(Long taskId);
+    List<Label> findAllByTasks_Id(Long taskId);
 
     Optional<Label> findLabelByIdAndUser_Id(Long labelId, Long userId);
 

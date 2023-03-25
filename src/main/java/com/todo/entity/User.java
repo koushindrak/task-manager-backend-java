@@ -1,5 +1,6 @@
 package com.todo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.todo.constants.CommonConstants;
 import com.todo.constants.Role;
 import jakarta.persistence.*;
@@ -36,8 +37,7 @@ public class User extends ParentEntity implements UserDetails {
     @Column(nullable = false, unique = true,length = 100)
     private String email;
 
-    @Column(nullable = false,length = 16)
-    @Size(min = 8,max = 16)
+    @Column(nullable = false)
     private String password;
 
     @Column(name = "phone_number",length = 12)
@@ -49,15 +49,19 @@ public class User extends ParentEntity implements UserDetails {
 
     /// mapping-   users-groups==> M2M, user-labels==> 12M, user-tokens==> 12M
     @ManyToMany // will be having users_groups table
+    @JsonIgnoreProperties("users")
     private Set<Group> groups;
 
     @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in label table
+    @JsonIgnoreProperties("user")
     private Set<Label> labels = new HashSet<>();
 
     @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in login_details table
+    @JsonIgnoreProperties("user")
     private List<LoginDetails> tokens;
 
     @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in tasks table
+    @JsonIgnoreProperties("user")
     private Set<Task> tasks;
 
     @OneToMany(mappedBy = "user")
@@ -98,4 +102,16 @@ public class User extends ParentEntity implements UserDetails {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }

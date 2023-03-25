@@ -33,16 +33,24 @@ public class TaskUtils {
         BeanUtils.copyProperties(task, taskResponse);
         List<TaskLabelResponse> labels = new ArrayList<>();
         log.info("Labels for task id "+task.getId()+" are-"+task.getLabels());
-        task.getLabels().forEach(label -> {
-            TaskLabelResponse taskLabelResponse = new TaskLabelResponse();
-            taskLabelResponse.setLabelId(label.getId());
-            taskLabelResponse.setLabelName(label.getName());
-            labels.add(taskLabelResponse);
-        });
-        taskResponse.setLabels(labels);
+        setLabels(task, taskResponse, labels);
+
         taskResponse.setPriority(task.getPriority().name());
         return taskResponse;
     }
+
+    private static void setLabels(Task task, TaskResponse taskResponse, List<TaskLabelResponse> labels) {
+        if(Objects.nonNull(task.getLabels())){
+            task.getLabels().forEach(label -> {
+                TaskLabelResponse taskLabelResponse = new TaskLabelResponse();
+                taskLabelResponse.setLabelId(label.getId());
+                taskLabelResponse.setLabelName(label.getName());
+                labels.add(taskLabelResponse);
+            });
+            taskResponse.setLabels(labels);
+        }
+    }
+
     public Task saveOrUpdateTask(TaskRequest taskRequest, Task task) {
         task.setName(taskRequest.getName());
         task.setDescription(taskRequest.getDescription());

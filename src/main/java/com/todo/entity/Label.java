@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "labels")
 @Data
-public class Label {
+public class Label extends ParentEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
