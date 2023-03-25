@@ -48,8 +48,11 @@ public class User extends ParentEntity implements UserDetails {
     private Role role;
 
     /// mapping-   users-groups==> M2M, user-labels==> 12M, user-tokens==> 12M
-    @ManyToMany // will be having users_groups table
-    @JsonIgnoreProperties("users")
+   // @ManyToMany // will be having users_groups table
+//    @JsonIgnoreProperties("users")
+    @ManyToMany
+    @JoinTable(name = "groups_users", joinColumns =
+    @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<Group> groups;
 
     @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in label table

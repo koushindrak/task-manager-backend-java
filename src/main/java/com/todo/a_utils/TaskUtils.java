@@ -54,7 +54,7 @@ public class TaskUtils {
     public Task saveOrUpdateTask(TaskRequest taskRequest, Task task) {
         task.setName(taskRequest.getName());
         task.setDescription(taskRequest.getDescription());
-        task.setDueDate(Date.from(taskRequest.getDueDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        task.setDueDate(taskRequest.getDueDate());
 
         if(Objects.nonNull(taskRequest.getStatus())){
             task.setTaskStatus(TaskStatus.valueOf(taskRequest.getStatus()));

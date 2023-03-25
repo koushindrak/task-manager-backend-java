@@ -11,7 +11,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "group_details")
-@Data
+@Setter
+@Getter
 public class Group extends ParentEntity {
 
     @Id
@@ -27,14 +28,21 @@ public class Group extends ParentEntity {
     @Column(name = "status",columnDefinition = "ENUM('ACTIVE', 'INACTIVE')")
     private GroupStatus status;
 
+    @Column(name = "owner_id")
     private Long ownerId;
 
-    // mappings-- Group-User(members) M2M, Group-Task- 12M
-    @ManyToMany(mappedBy = "groups") // ignore tables starting with groups i.e groups_members, just create members_groups
-    private Set<User> members = new HashSet<>();
+    // mappings-- Group-User(users) M2M, Group-Task- 12M
+//    @ManyToMany(mappedBy = "groups") // ignore tables starting with groups i.e groups_users, just create users_groups
+
+    @ManyToMany(mappedBy = "groups",fetch = FetchType.EAGER)
+//    @JoinTable(name = "groups_users", joinColumns =
+//    @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(mappedBy = "group")
     private Set<Task> tasks;
+
+
 }
 
 
