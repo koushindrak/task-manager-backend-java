@@ -14,5 +14,4 @@ public class ProjectResponse {
     private Date startDate;
     private Date endDate;
     private String status;
-    private Long userId;
 }

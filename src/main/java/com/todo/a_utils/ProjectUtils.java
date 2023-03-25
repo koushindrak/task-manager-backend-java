@@ -28,6 +28,7 @@ public class ProjectUtils {
     public ProjectResponse toProjectResponse(Project project) {
         ProjectResponse projectResponse = new ProjectResponse();
          BeanUtils.copyProperties(project, projectResponse);
+         projectResponse.setStatus(project.getStatus().name());
          return projectResponse;
     }
 }
