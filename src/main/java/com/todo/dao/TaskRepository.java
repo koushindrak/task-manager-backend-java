@@ -10,6 +10,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -31,4 +32,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findTaskByLabelId(@Param("labelId") Long labelId);
 
     List<Task> findTaskByLabels_Id(Long labelId);
+
+    @Query("SELECT t.user.id, t FROM Task t WHERE t.dueDate = CURRENT_DATE GROUP BY t.user.id")
+    Map<Long, List<Task>> findTasksDueTodayByUser();
 }

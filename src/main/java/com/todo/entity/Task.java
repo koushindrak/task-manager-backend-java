@@ -9,13 +9,16 @@ import com.todo.constants.TaskStatus;
 import com.todo.constants.TaskType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
-@Data
+@Setter
+@Getter
 public class Task extends ParentEntity {
 
     @Id

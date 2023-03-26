@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Task List</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        table th,
+        table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Task List</h1>
+<p>Below is a list of tasks that need to be completed:</p>
+<table>
+    <thead>
+    <tr>
+        <th>Task Name</th>
+        <th>Due Date</th>
+        <th>Description</th>
+        <th>Group Name</th>
+        <th>Project Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.taskName}"></td>
+        <td th:text="${task.taskDueDate}"></td>
+        <td th:text="${task.taskDescription}"></td>
+        <td th:text="${task.groupName}"></td>
+        <td th:text="${task.projectName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
