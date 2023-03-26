@@ -1,6 +1,7 @@
 package com.todo.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.todo.app_controller.CommentResponse;
 import com.todo.entity.Label;
 import com.todo.entity.Task;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class TaskResponse {
     private Date dueDate;
 
     private List<TaskLabelResponse> labels;
+
+    private List<CommentResponse> comments;
 
     private String priority;
 }

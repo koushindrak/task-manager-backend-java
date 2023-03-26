@@ -1,5 +1,6 @@
 package com.todo.a_utils;
 
+import com.todo.business.CommentService;
 import com.todo.constants.Priority;
 import com.todo.constants.TaskStatus;
 import com.todo.dao.LabelRepository;
@@ -28,13 +29,13 @@ public class TaskUtils {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
 
+
     public static TaskResponse toTaskResponse(Task task) {
         TaskResponse taskResponse = new TaskResponse();
         BeanUtils.copyProperties(task, taskResponse);
         List<TaskLabelResponse> labels = new ArrayList<>();
         log.info("Labels for task id "+task.getId()+" are-"+task.getLabels());
         setLabels(task, taskResponse, labels);
-
         taskResponse.setPriority(task.getPriority().name());
         return taskResponse;
     }

@@ -42,6 +42,8 @@ public class Group extends ParentEntity {
     @OneToMany(mappedBy = "group")
     private Set<Task> tasks;
 
+//    @OneToMany(mappedBy = "group")
+//    private Set<Notification> notifications;
 
 }
 

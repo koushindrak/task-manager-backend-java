@@ -25,6 +25,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskUtils taskUtils;
     private final CommonUtils commonUtils;
+    private final CommentService commentService;
 
     public TaskResponse createTask(TaskRequest taskRequest) {
         Task task = new Task();
@@ -42,7 +43,9 @@ public class TaskService {
     public TaskResponse getTaskById(Long id) {
         Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
-        return TaskUtils.toTaskResponse(task);
+        TaskResponse taskResponse = TaskUtils.toTaskResponse(task);
+        taskResponse.setComments(commentService.getCommentsByTaskId(id));
+        return taskResponse;
     }
 
     public Task updateTask(Long id, TaskRequest taskRequest) {

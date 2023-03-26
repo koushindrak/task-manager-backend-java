@@ -43,7 +43,6 @@
     <tr>
         <th>Task Name</th>
         <th>Due Date</th>
-        <th>Description</th>
         <th>Group Name</th>
         <th>Project Name</th>
     </tr>
@@ -52,7 +51,6 @@
     <tr th:each="task : ${tasks}">
         <td th:text="${task.taskName}"></td>
         <td th:text="${task.taskDueDate}"></td>
-        <td th:text="${task.taskDescription}"></td>
         <td th:text="${task.groupName}"></td>
         <td th:text="${task.projectName}"></td>
     </tr>

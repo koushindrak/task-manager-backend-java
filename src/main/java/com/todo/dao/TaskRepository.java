@@ -2,6 +2,7 @@ package com.todo.dao;
 
 import com.todo.entity.Task;
 import jakarta.transaction.Transactional;
+import org.joda.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,6 +35,22 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findTaskByLabels_Id(Long labelId);
 
-    @Query("SELECT t.user.id, t FROM Task t WHERE t.dueDate = CURRENT_DATE GROUP BY t.user.id")
-    Map<Long, List<Task>> findTasksDueTodayByUser();
+//    @Query("SELECT " +
+//            "t.user.email as user_email," +
+//            " t.id as task_id," +
+//            "t.name as task_name," +
+//            "t.dueDate as task_due_date," +
+//            " t.group.name as task_group_name, " +
+//            "t.project.name as task_project_name " +
+//            "FROM Task t " +
+//            "WHERE DATE(t.dueDate) >=:currentDate")
+//    List<Object[]> findTasksDueTodayByUser(@Param("currentDate") Date currentDate);
+@Query("SELECT " +
+        " t.id as task_id," +
+        "t.name as task_name," +
+        "t.dueDate as task_due_date" +
+        " FROM Task t ")
+List<Object[]> findTasksDueTodayByUser();
+    @Query("SELECT t FROM Task t WHERE DATE(t.dueDate) = CURRENT_DATE")
+List<Task> findTasksByDueDateIsToday();
 }

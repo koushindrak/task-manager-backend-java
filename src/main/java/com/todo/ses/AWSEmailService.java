@@ -1,5 +1,6 @@
 package com.todo.ses;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
@@ -19,10 +20,9 @@ public class AWSEmailService {
 
     public void sendEmail(EmailRequest emailRequest) throws Exception {
 
-        List<EmailTasks> tasks = new ArrayList<>();
-        tasks.add(new EmailTasks("Task 1", "2023-03-31", "Description 1", "Group 1", "Project 1"));
-        tasks.add(new EmailTasks("Task 2", "2023-04-15", "Description 2", "Group 2", "Project 2"));
-        tasks.add(new EmailTasks("Task 3", "2023-04-30", "Description 3", "Group 3", "Project 3"));
+        List<EmailTask> tasks = new ArrayList<>();
+        tasks.add(new EmailTask("Task 1",  new LocalDate(),  "Group 1", "Project 1"));
+        tasks.add(new EmailTask("Task 2",  new LocalDate(),  "Group 2", "Project 2"));
 
         // Create a Thymeleaf context with the tasks list as a variable
         Context context = new Context();

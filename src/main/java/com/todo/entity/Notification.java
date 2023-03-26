@@ -21,7 +21,7 @@ public class Notification {
     private Timestamp createdAt;
 
     @Column(nullable = false,updatable = false)
-    private String action;
+    private String description;
 
     @Column(name="message" , length = 65535, columnDefinition="TEXT",nullable = false,updatable = false)
     private String message;
@@ -30,11 +30,4 @@ public class Notification {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    // unidirectional mapping
-    @OneToOne
-    private User user;
-
-    // unidirectional mapping
-    @OneToOne
-    private Group group;
 }

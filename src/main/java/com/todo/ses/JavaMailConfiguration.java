@@ -1,5 +1,7 @@
 package com.todo.ses;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,8 @@ import java.util.Properties;
 @Profile("dev")
 @Configuration
 @ConfigurationProperties(prefix = "spring.mail")
+@Setter
+@Getter
 public class JavaMailConfiguration {
 
     @Value("${spring.mail.host}")
