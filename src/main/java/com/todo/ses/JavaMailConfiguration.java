@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-@Profile("dev")
+//@Profile("dev")
 @Configuration
 @ConfigurationProperties(prefix = "spring.mail")
 @Setter
