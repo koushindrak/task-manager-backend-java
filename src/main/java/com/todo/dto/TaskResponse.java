@@ -1,14 +1,7 @@
 package com.todo.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.todo.app_controller.CommentResponse;
-import com.todo.entity.Label;
-import com.todo.entity.Task;
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

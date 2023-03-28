@@ -1,6 +1,6 @@
 package com.todo.security.auth;
 
-import com.todo.dto.ResponseDTO;
+import com.todo.dto.SuccessResponse;
 import com.todo.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +18,13 @@ public class AuthenticationController {
   private final AuthenticationService service;
 
   @PostMapping("/signup")
-  public ResponseDTO.SuccessResponse register(@Valid @RequestBody RegisterRequest request) {
+  public SuccessResponse register(@Valid @RequestBody RegisterRequest request) {
     service.register(request);
-    return new ResponseDTO().created("User Registered Successfull!!!", User.class);
+    return new SuccessResponse().created("User Registered Successfully!!!", User.class);
   }
   @PostMapping("/signin")
-  public ResponseDTO.SuccessResponse authenticate(@Valid @RequestBody AuthenticationRequest request) {
-    return new ResponseDTO().retrieved(service.authenticate(request), User.class);
+  public SuccessResponse<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
+    return new SuccessResponse<AuthenticationResponse>().retrieved(service.authenticate(request), User.class);
   }
 
 

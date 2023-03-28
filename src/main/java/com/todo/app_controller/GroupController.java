@@ -3,6 +3,8 @@ package com.todo.app_controller;
 import com.todo.business.GroupService;
 import com.todo.dto.GroupRequest;
 import com.todo.dto.GroupResponse;
+import com.todo.dto.SuccessResponse;
+import com.todo.entity.Group;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,16 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/groups")
+@RequestMapping("/api/v1/groups")
 @AllArgsConstructor
 public class GroupController {
 
     private final GroupService groupService;
 
     @PostMapping
-    public ResponseEntity<GroupResponse> createGroup(@RequestBody @Valid GroupRequest groupRequest) {
+    public SuccessResponse<GroupResponse> createGroup(@RequestBody @Valid GroupRequest groupRequest) {
         GroupResponse group = groupService.createGroup(groupRequest);
-        return new ResponseEntity<>(group, HttpStatus.CREATED);
+        return new SuccessResponse<GroupResponse>().created(group, Group.class);
     }
 
     @GetMapping

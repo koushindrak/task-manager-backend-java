@@ -2,7 +2,7 @@ package com.todo.business;
 
 import com.todo.a_utils.CommentRequest;
 import com.todo.a_utils.CommentUtils;
-import com.todo.app_controller.CommentResponse;
+import com.todo.dto.CommentResponse;
 import com.todo.dao.CommentRepository;
 import com.todo.entity.Comments;
 import com.todo.exceptions.ResourceNotFoundException;

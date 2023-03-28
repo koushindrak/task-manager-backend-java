@@ -12,32 +12,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/task-label")
+@RequestMapping("/api/v1/tasks-labels")
 @AllArgsConstructor
 public class TaskLabelController {
 
     private final TaskLabelService taskLabelService;
 
     @PutMapping("/add-label")
-    public ResponseDTO.SuccessResponse addLabelOnTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest){
+    public SuccessResponse addLabelOnTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest){
         taskLabelService.addLabelOnTask(taskLabelRequest);
-        return new ResponseDTO().updated("Label added to task ", Task.class);
+        return new SuccessResponse().updated("Label added to task ", Task.class);
     }
 
     @PutMapping("/remove-label")
-    public ResponseDTO.SuccessResponse removeLabelFromTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest){
+    public SuccessResponse removeLabelFromTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest){
         taskLabelService.removeLabelFromTask(taskLabelRequest);
-        return new ResponseDTO().updated("Label Removed from task ", Task.class);
+        return new SuccessResponse().updated("Label Removed from task ", Task.class);
     }
     @GetMapping("/task-by-label")
-    public ResponseDTO.SuccessResponse getTaskByLabel(@RequestParam Long labelId){
+    public SuccessResponse getTaskByLabel(@RequestParam Long labelId){
         List<TaskResponse> taskResponses = taskLabelService.getTasksByLabel(labelId);
-        return new ResponseDTO().retrieved(taskResponses,Task.class);
+        return new SuccessResponse().retrieved(taskResponses,Task.class);
     }
 
     @GetMapping("/label-by-task")
-    public ResponseDTO.SuccessResponse getLabelsByTask(@RequestParam Long taskId){
+    public SuccessResponse getLabelsByTask(@RequestParam Long taskId){
         List<LabelResponse> labelResponses = taskLabelService.getLabelsByTask(taskId);
-        return new ResponseDTO().retrieved(labelResponses,Task.class);
+        return new SuccessResponse().retrieved(labelResponses,Task.class);
     }
 }

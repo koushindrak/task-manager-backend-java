@@ -1,4 +1,4 @@
-package com.todo.app_controller;
+package com.todo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

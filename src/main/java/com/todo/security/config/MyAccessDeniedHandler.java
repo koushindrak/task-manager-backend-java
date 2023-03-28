@@ -1,6 +1,5 @@
 package com.todo.security.config;
 
-import com.todo.dto.ResponseDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

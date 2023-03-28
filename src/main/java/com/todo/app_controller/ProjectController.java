@@ -3,8 +3,8 @@ package com.todo.app_controller;
 import com.todo.business.ProjectService;
 import com.todo.dto.ProjectRequest;
 import com.todo.dto.ProjectResponse;
-import com.todo.dto.ResponseDTO;
-import com.todo.dto.ResponseDTO.SuccessResponse;
+import com.todo.dto.SuccessResponse;
+import com.todo.entity.Project;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("/api/v1/projects")
 @AllArgsConstructor
 public class ProjectController {
 
@@ -22,35 +22,35 @@ public class ProjectController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SuccessResponse createProject(@RequestBody @Valid ProjectRequest projectRequest) {
+    public SuccessResponse<ProjectResponse> createProject(@RequestBody @Valid ProjectRequest projectRequest) {
         ProjectResponse project = projectService.createProject(projectRequest);
-        return new ResponseDTO().created(project, ProjectResponse.class);
+        return new SuccessResponse().created(project, Project.class);
     }
 
 
     @GetMapping("/{id}")
-    public SuccessResponse getProjectById(@PathVariable Long id) {
+    public SuccessResponse<ProjectResponse> getProjectById(@PathVariable Long id) {
         ProjectResponse project = projectService.getProjectById(id);
-        return new ResponseDTO().retrieved(project, ProjectResponse.class);
+        return new SuccessResponse<ProjectResponse>().retrieved(project, Project.class);
     }
 
     @GetMapping
-    public SuccessResponse getAllProjects() {
+    public SuccessResponse<List<ProjectResponse>> getAllProjects() {
         List<ProjectResponse> projects = projectService.getAllProjects();
-        return new ResponseDTO().retrieved(projects, ProjectResponse.class);
+        return new SuccessResponse<List<ProjectResponse>>().retrieved(projects, Project.class);
     }
 
 
 
     @PutMapping("/{id}")
-    public SuccessResponse updateProject(@PathVariable Long id, @RequestBody @Valid ProjectRequest projectRequest) {
+    public SuccessResponse<ProjectResponse> updateProject(@PathVariable Long id, @RequestBody @Valid ProjectRequest projectRequest) {
         ProjectResponse project = projectService.updateProject(id, projectRequest);
-        return new ResponseDTO().updated(project, ProjectResponse.class);
+        return new SuccessResponse<ProjectResponse>().updated(project, Project.class);
     }
 
     @DeleteMapping("/{id}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public SuccessResponse deleteProject(@PathVariable Long id) {
-        return new ResponseDTO().deleted(projectService.deleteProject(id), ProjectResponse.class);
+    public SuccessResponse<ProjectResponse> deleteProject(@PathVariable Long id) {
+        return new SuccessResponse<ProjectResponse>().deleted(projectService.deleteProject(id), ProjectResponse.class);
     }
 }
