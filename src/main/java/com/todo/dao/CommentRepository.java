@@ -1,4 +1,4 @@
-package com.todo.dto;
+package com.todo.dao;
 
 import com.todo.entity.Comments;
 import org.springframework.data.jpa.repository.JpaRepository;
