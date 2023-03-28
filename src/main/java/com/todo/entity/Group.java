@@ -1,35 +1,69 @@
 package com.todo.entity;
 
+import com.todo.constants.GroupStatus;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "groups")
-@Data
+@Table(name = "group_details")
+@Setter
+@Getter
 public class Group extends ParentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50,nullable = false)
     private String name;
 
     private String description;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status",columnDefinition = "ENUM('ACTIVE', 'INACTIVE')")
+    private GroupStatus status;
 
-    private Long owner;
+    @Column(name = "owner_id")
+    private Long ownerId;
 
-    @ManyToMany
-    @JoinTable(name = "group_member",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> members = new HashSet<>();
+    // mappings-- Group-User(users) M2M, Group-Task- 12M
+//    @ManyToMany(mappedBy = "groups") // ignore tables starting with groups i.e groups_users, just create users_groups
+
+    @ManyToMany(mappedBy = "groups",fetch = FetchType.EAGER)
+//    @JoinTable(name = "groups_users", joinColumns =
+//    @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(mappedBy = "group")
-    private Set<UserGroupRole> groupRoles = new HashSet<>();
+    private Set<Task> tasks;
+
+//    @OneToMany(mappedBy = "group")
+//    private Set<Notification> notifications;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

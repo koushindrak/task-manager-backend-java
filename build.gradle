@@ -45,14 +45,35 @@ dependencies {
 
 	//jwt and bcrypt
 	implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: "6.0.2"
-	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+//	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
 
 	//DOCS
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.3'
+	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.3'
 
 	//mapper
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+
+	// aws
+	implementation group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.12.434'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
+	implementation group: 'jakarta.mail', name: 'jakarta.mail-api', version: '2.1.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+
+	////
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 }
 //

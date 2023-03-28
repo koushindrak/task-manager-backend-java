@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "b15618f2-02d7-4068-96da-6f612d287d68",
+		"name": "AUTH-COLLECTION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "21082348-b15618f2-02d7-4068-96da-6f612d287d68"
+	},
+	"item": [
+		{
+			"name": "1-SIGNUP",
+			"id": "726de725-4642-4f3f-a245-2a0f3cc79c1d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstname\": \"string\",\n  \"lastname\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2612/api/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2612",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-SIGNIN",
+			"id": "489f8fa3-e652-4d72-8910-5dd7d5089c38",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2612/api/v1/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2612",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

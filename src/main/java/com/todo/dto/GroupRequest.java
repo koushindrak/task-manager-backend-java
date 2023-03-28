@@ -1,24 +1,12 @@
 package com.todo.dto;
 
 import com.todo.entity.Group;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class GroupRequest {
-    private String name;
-    private String description;
-    private String status;
-    private Long owner;
-
-    public Group toGroup() {
-        Group group = new Group();
-        group.setName(this.name);
-        group.setDescription(this.description);
-        group.setStatus(this.status);
-        group.setOwner(this.owner);
-        return group;
-    }
-
+public record GroupRequest(@NotBlank String name, String description,@NotBlank String status) {
+    
 }

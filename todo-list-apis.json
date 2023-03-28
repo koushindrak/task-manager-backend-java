@@ -1,0 +1,80 @@
+curl -X 'POST' \
+  'http://localhost:2612/api/v1/auth/signup' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "password": "string"
+}'
+
+
+curl -X 'POST' \
+  'http://localhost:2612/api/v1/auth/signin' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "email": "string",
+  "password": "string"
+}'
+
+
+
+
+
+
+curl -X 'GET' \
+  'http://localhost:2612/tasks' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer {{AUTH1}}'
+
+
+curl -X 'GET' \
+  'http://localhost:2612/tasks/1' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer {{AUTH1}}'
+
+
+  curl -X 'POST' \
+  'http://localhost:2612/tasks' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer {{AUTH1}}' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "string",
+  "description": "string",
+  "dueDate": "2023-03-21",
+  "groupId": 0,
+  "labelIds": [
+    0
+  ],
+  "priority": "string",
+  "status": "string"
+}'
+
+
+curl -X 'PUT' \
+  'http://localhost:2612/tasks/1' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer {{AUTH1}}' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "string",
+  "description": "string",
+  "dueDate": "2023-03-21",
+  "groupId": 0,
+  "labelIds": [
+    0
+  ],
+  "priority": "string",
+  "status": "string"
+}'
+
+
+
+curl -X 'DELETE' \
+  'http://localhost:2612/tasks/1' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer {{AUTH1}}'
+

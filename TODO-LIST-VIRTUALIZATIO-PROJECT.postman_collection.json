@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "596c1526-c094-41cf-a6f8-9b42d5b84e6a",
+		"name": "TODO-LIST-VIRTUALIZATIO-PROJECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21082348"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "SIGNIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"koushindra\",\n    \"password\":\"Hello@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:2612/api/v1/auth/signin"
+					},
+					"response": []
+				},
+				{
+					"name": "SIGNUP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\":\"koushindra\",\n    \"lastname\":\"Kumar\",\n    \"email\" : \"koushindra@gmail.com\",\n    \"password\":\"Hello@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:2612/api/v1/auth/signup"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

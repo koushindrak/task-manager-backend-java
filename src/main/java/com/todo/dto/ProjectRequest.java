@@ -1,7 +1,6 @@
 package com.todo.dto;
 
-import com.todo.entity.Project;
-import com.todo.entity.User;
+import com.todo.constants.ProjectStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -22,21 +21,5 @@ public class ProjectRequest {
     @NotNull
     private Date endDate;
 
-    @NotBlank
-    private String status;
-
-    @NotNull
-    private Long userId;
-    
-    // getters and setters
-    public Project toProject(ProjectRequest projectRequest) {
-        Project project = new Project();
-        project.setName(name);
-        project.setDescription(description);
-        project.setStartDate(startDate);
-        project.setEndDate(endDate);
-        project.setStatus(status);
-       // project.setUser(user);
-        return project;
-    }
+    private ProjectStatus status = ProjectStatus.ACTIVE;
 }

@@ -2,6 +2,7 @@ package com.todo.dto;
 
 import com.todo.entity.Project;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 
@@ -13,15 +14,4 @@ public class ProjectResponse {
     private Date startDate;
     private Date endDate;
     private String status;
-    private Long userId;
-
-    public ProjectResponse(Project project) {
-        this.id = project.getId();
-        this.name = project.getName();
-        this.description = project.getDescription();
-        this.startDate = project.getStartDate();
-        this.endDate = project.getEndDate();
-        this.status = project.getStatus();
-        this.userId = project.getUser().getId();
-    }
 }
