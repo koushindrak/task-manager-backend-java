@@ -2,8 +2,8 @@ package com.todo.a_utils;
 
 import com.todo.context.ExecutionContext;
 import com.todo.dao.UserRepository;
-import com.todo.dto.LabelRequest;
-import com.todo.dto.LabelResponse;
+import com.todo.dto.request.LabelRequest;
+import com.todo.dto.response.LabelResponse;
 import com.todo.entity.Label;
 import com.todo.entity.User;
 import lombok.AllArgsConstructor;

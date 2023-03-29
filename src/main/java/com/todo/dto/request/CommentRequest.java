@@ -1,4 +1,4 @@
-package com.todo.a_utils;
+package com.todo.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CommentRequest {
-    @NotNull
+    @NotNull(message = "Task Id is mandatory")
     private Long taskId;
-    @NotBlank
+    @NotBlank(message = "content is mandatory")
     private String content;
 }

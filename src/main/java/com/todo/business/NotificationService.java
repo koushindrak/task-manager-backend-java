@@ -1,11 +1,7 @@
 package com.todo.business;
 
-import com.todo.a_utils.CommonUtils;
-import com.todo.a_utils.NotificationUtils;
 import com.todo.dao.NotificationRepository;
-import com.todo.dto.NotificationRequest;
-import com.todo.dto.NotificationResponse;
-import com.todo.entity.Notification;
+import com.todo.dto.response.NotificationResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

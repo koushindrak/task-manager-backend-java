@@ -3,15 +3,13 @@ package com.todo.business;
 import com.todo.a_utils.CommonUtils;
 import com.todo.a_utils.LabelUtils;
 import com.todo.dao.LabelRepository;
-import com.todo.dto.LabelRequest;
-import com.todo.dto.LabelResponse;
+import com.todo.dto.request.LabelRequest;
+import com.todo.dto.response.LabelResponse;
 import com.todo.entity.Label;
-import com.todo.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

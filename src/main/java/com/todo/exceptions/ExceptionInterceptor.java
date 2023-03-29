@@ -1,6 +1,6 @@
 package com.todo.exceptions;
 
-import com.todo.dto.ErrorResponse;
+import com.todo.dto.response.ErrorResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,9 @@
 package com.todo.app_controller;
 
 import com.todo.business.UserService;
-import com.todo.dto.SuccessResponse;
-import com.todo.dto.UserRequest;
-import com.todo.dto.UserResponse;
+import com.todo.dto.response.SuccessResponse;
+import com.todo.dto.request.UserRequest;
+import com.todo.dto.response.UserResponse;
 import com.todo.entity.User;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;

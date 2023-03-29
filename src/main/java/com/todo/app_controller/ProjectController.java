@@ -1,14 +1,13 @@
 package com.todo.app_controller;
 
 import com.todo.business.ProjectService;
-import com.todo.dto.ProjectRequest;
-import com.todo.dto.ProjectResponse;
-import com.todo.dto.SuccessResponse;
+import com.todo.dto.request.ProjectRequest;
+import com.todo.dto.response.ProjectResponse;
+import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Project;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

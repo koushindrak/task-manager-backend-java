@@ -1,16 +1,13 @@
 package com.todo.app_controller;
 
 import com.todo.business.GroupUserService;
-import com.todo.dto.GroupResponse;
-import com.todo.dto.GroupUserRequest;
-import com.todo.dto.SuccessResponse;
-import com.todo.dto.UserResponse;
+import com.todo.dto.response.GroupResponse;
+import com.todo.dto.request.GroupUserRequest;
+import com.todo.dto.response.SuccessResponse;
+import com.todo.dto.response.UserResponse;
 import com.todo.entity.User;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,9 +39,9 @@ public class GroupUserController {
     }
 
     // I can see only those group, in which either I am owner or I'm member
-    @GetMapping("/groups-by-user")
-    public SuccessResponse<List<GroupResponse>> getGroupsByUser(@RequestParam Long userId){
-        List<GroupResponse> groupResponseList= groupUserService.getGroupsByUser(userId);
+    @GetMapping("/my-groups")
+    public SuccessResponse<List<GroupResponse>> getGroupsByUser(){
+        List<GroupResponse> groupResponseList= groupUserService.getGroupsByUser();
         return new SuccessResponse<List<GroupResponse>>().retrieved(groupResponseList,User.class);
     }
 

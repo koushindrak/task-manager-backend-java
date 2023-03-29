@@ -1,6 +1,9 @@
-package com.todo.dto;
+package com.todo.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.todo.constants.Priority;
+import com.todo.constants.TaskStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +17,7 @@ import java.util.List;
 @Data
 public class TaskRequest {
 
-    @NotBlank
+    @NotBlank(message = "Task name can not be blank")
     private String name;
 
     private String description;
@@ -27,7 +30,11 @@ public class TaskRequest {
 
     private List<Long> labelIds;
 
-    private String priority;
 
-    private String status;
+    @NotNull(message = "Priority can not be null")
+    private Priority priority;
+
+    @NotBlank(message = "Task status can be - TODO, INPROGRESS OR DONE")
+    @Schema(allowableValues = "TODO, INPROGRESS, DONE")
+    private TaskStatus status;
 }

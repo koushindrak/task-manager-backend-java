@@ -1,4 +1,4 @@
-package com.todo.dto;
+package com.todo.dto.response;
 
 import lombok.Data;
 
@@ -22,4 +22,12 @@ public class TaskResponse {
     private List<CommentResponse> comments;
 
     private String priority;
+
+    private Long groupId;
+
+    private String groupName;
+
+    private Long projectId;
+
+    private String projectName;
 }

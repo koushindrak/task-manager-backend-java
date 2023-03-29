@@ -1,4 +1,4 @@
-package com.todo.dto;
+package com.todo.dto.response;
 
 import com.todo.entity.Task;
 import com.todo.entity.User;

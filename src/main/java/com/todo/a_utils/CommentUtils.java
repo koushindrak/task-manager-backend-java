@@ -1,6 +1,7 @@
 package com.todo.a_utils;
 
-import com.todo.dto.CommentResponse;
+import com.todo.dto.request.CommentRequest;
+import com.todo.dto.response.CommentResponse;
 import com.todo.dao.TaskRepository;
 import com.todo.entity.Comments;
 import com.todo.entity.Task;

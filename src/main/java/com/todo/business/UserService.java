@@ -1,8 +1,8 @@
 package com.todo.business;
 
 import com.todo.dao.UserRepository;
-import com.todo.dto.UserRequest;
-import com.todo.dto.UserResponse;
+import com.todo.dto.request.UserRequest;
+import com.todo.dto.response.UserResponse;
 import com.todo.entity.User;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

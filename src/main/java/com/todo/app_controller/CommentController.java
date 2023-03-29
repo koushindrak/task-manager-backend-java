@@ -1,14 +1,12 @@
 package com.todo.app_controller;
 
-import com.todo.a_utils.CommentRequest;
+import com.todo.dto.request.CommentRequest;
 import com.todo.business.CommentService;
-import com.todo.dto.CommentResponse;
-import com.todo.dto.SuccessResponse;
+import com.todo.dto.response.CommentResponse;
+import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Comments;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

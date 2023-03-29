@@ -1,7 +1,6 @@
 package com.todo.security.config;
 
 import com.todo.dao.UserRepository;
-import com.todo.exceptions.AuthenticationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +15,6 @@ public class UserDetailsBean {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> repository.findByEmail(username)
-                .orElseThrow(() -> new AuthenticationException(401,"User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

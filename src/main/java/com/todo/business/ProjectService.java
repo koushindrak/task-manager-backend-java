@@ -3,13 +3,12 @@ package com.todo.business;
 import com.todo.a_utils.CommonUtils;
 import com.todo.a_utils.ProjectUtils;
 import com.todo.dao.ProjectRepository;
-import com.todo.dto.ProjectRequest;
-import com.todo.dto.ProjectResponse;
+import com.todo.dto.request.ProjectRequest;
+import com.todo.dto.response.ProjectResponse;
 import com.todo.entity.Project;
 import com.todo.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

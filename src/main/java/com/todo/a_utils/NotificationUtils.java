@@ -1,6 +1,6 @@
 package com.todo.a_utils;
 
-import com.todo.dto.NotificationResponse;
+import com.todo.dto.response.NotificationResponse;
 import com.todo.entity.Notification;
 
 import java.util.ArrayList;

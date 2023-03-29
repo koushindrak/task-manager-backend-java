@@ -1,14 +1,13 @@
 package com.todo.app_controller;
 
 import com.todo.business.LabelService;
-import com.todo.dto.LabelRequest;
-import com.todo.dto.LabelResponse;
-import com.todo.dto.SuccessResponse;
+import com.todo.dto.request.LabelRequest;
+import com.todo.dto.response.LabelResponse;
+import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Label;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

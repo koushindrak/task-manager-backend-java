@@ -1,9 +1,9 @@
 package com.todo.app_controller;
 
 import com.todo.business.GroupService;
-import com.todo.dto.GroupRequest;
-import com.todo.dto.GroupResponse;
-import com.todo.dto.SuccessResponse;
+import com.todo.dto.request.GroupRequest;
+import com.todo.dto.response.GroupResponse;
+import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Group;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

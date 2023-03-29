@@ -1,12 +1,13 @@
 package com.todo.app_controller;
 
 import com.todo.business.TaskLabelService;
-import com.todo.dto.*;
+import com.todo.dto.request.TaskLabelRequest;
+import com.todo.dto.response.LabelResponse;
+import com.todo.dto.response.SuccessResponse;
+import com.todo.dto.response.TaskResponse;
 import com.todo.entity.Task;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

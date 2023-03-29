@@ -20,8 +20,10 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
 
     Optional<Group> findAllByIdAndOwnerId(Long gId, Long ownerId);
 
-    @Query("SELECT g FROM Group g JOIN FETCH g.users WHERE g.id = :groupId and g.ownerId = :ownerId")
-    Optional<Group> findGroupWithUsersById(@Param("groupId") Long groupId,@Param("ownerId") Long ownerId);
+
+    @Query("SELECT g,u FROM Group g JOIN FETCH g.users u WHERE g.id = :groupId AND g.ownerId = :ownerId")
+    Optional<Group> findGroupByIdAndOwnerIdWithUsers(@Param("groupId") Long groupId, @Param("ownerId") Long ownerId);
+
 
     void deleteGroupByIdAndOwnerId(Long group_id, Long ownerId);
 

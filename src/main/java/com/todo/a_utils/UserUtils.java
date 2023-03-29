@@ -1,6 +1,6 @@
 package com.todo.a_utils;
 
-import com.todo.dto.UserResponse;
+import com.todo.dto.response.UserResponse;
 import com.todo.entity.User;
 import org.springframework.beans.BeanUtils;
 

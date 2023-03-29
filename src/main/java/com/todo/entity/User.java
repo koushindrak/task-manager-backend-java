@@ -20,7 +20,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 public class User extends ParentEntity implements UserDetails {
 
     @Id
