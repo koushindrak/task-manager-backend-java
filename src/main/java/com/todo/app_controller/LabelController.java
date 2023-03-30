@@ -5,6 +5,7 @@ import com.todo.dto.request.LabelRequest;
 import com.todo.dto.response.LabelResponse;
 import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Label;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name="2-Label Controller",description = "Used for creating Labels, further lables can be linked with tasks")
 @RestController
 @RequestMapping("/api/v1/labels")
 @AllArgsConstructor

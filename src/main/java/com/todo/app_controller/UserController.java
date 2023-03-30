@@ -5,6 +5,7 @@ import com.todo.dto.request.UserRequest;
 import com.todo.dto.response.SuccessResponse;
 import com.todo.dto.response.UserResponse;
 import com.todo.entity.User;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+@Hidden
 @RestController
 @RequestMapping("/api/v1/users")
 @AllArgsConstructor

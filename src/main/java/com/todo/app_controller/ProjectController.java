@@ -5,6 +5,7 @@ import com.todo.dto.request.ProjectRequest;
 import com.todo.dto.response.ProjectResponse;
 import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Project;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "1-Project Controller", description = "Used for project crud, futher task can be created in project")
 @RestController
 @RequestMapping("/api/v1/projects")
 @AllArgsConstructor

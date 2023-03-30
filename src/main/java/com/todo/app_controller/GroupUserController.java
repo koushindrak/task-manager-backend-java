@@ -6,12 +6,14 @@ import com.todo.dto.response.GroupResponse;
 import com.todo.dto.response.SuccessResponse;
 import com.todo.dto.response.UserResponse;
 import com.todo.entity.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "4- Group User Controller", description = "Used for adding,removing and viewing users for groups")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/groups-users")

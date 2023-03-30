@@ -2,6 +2,7 @@ package com.todo.security.auth;
 
 import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "0-Authentication Controller",description = "Used for signup and sign")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor

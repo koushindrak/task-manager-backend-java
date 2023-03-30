@@ -5,10 +5,12 @@ import com.todo.dto.request.CommentRequest;
 import com.todo.dto.response.CommentResponse;
 import com.todo.dto.response.SuccessResponse;
 import com.todo.entity.Comments;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "7-Comment Controller",description = "Used for comments cruds for tasks")
 @RestController
 @RequestMapping("/api/v1/comments")
 @AllArgsConstructor

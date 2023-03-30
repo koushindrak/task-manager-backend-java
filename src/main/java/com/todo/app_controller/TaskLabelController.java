@@ -6,12 +6,14 @@ import com.todo.dto.response.LabelResponse;
 import com.todo.dto.response.SuccessResponse;
 import com.todo.dto.response.TaskResponse;
 import com.todo.entity.Task;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "6- Task Label Controller",description = "Used for assigning,removing and views labels for task")
 @RestController
 @RequestMapping("/api/v1/tasks-labels")
 @AllArgsConstructor
