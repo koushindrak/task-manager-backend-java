@@ -45,6 +45,4 @@ public class SwaggerHeaderConfig {
         builder.featuresToEnable(SerializationFeature.INDENT_OUTPUT);
         return builder;
     }
-
-
 }
