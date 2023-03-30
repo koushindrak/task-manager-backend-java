@@ -19,8 +19,8 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @GetMapping
-    public SuccessResponse<List<NotificationResponse>> getNotificationForLoggedInUser(){
-       List<NotificationResponse> notificationResponses = notificationService.getNotificationForLoggedInUser();
-       return new SuccessResponse().retrieved(notificationResponses, Notification.class);
+    public SuccessResponse<List<NotificationResponse>> getNotificationForLoggedInUser() {
+        List<NotificationResponse> notificationResponses = notificationService.getNotificationForLoggedInUser();
+        return new SuccessResponse().retrieved(notificationResponses, Notification.class);
     }
 }

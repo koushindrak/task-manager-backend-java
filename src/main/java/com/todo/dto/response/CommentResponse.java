@@ -1,6 +1,5 @@
 package com.todo.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

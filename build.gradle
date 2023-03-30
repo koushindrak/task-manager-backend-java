@@ -71,6 +71,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	//utils
+	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
 
 	////
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"

@@ -1,8 +1,8 @@
 package com.todo.a_utils;
 
+import com.todo.dao.TaskRepository;
 import com.todo.dto.request.CommentRequest;
 import com.todo.dto.response.CommentResponse;
-import com.todo.dao.TaskRepository;
 import com.todo.entity.Comments;
 import com.todo.entity.Task;
 import com.todo.exceptions.ResourceNotFoundException;
@@ -13,10 +13,11 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class CommentUtils {
     private final TaskRepository taskRepository;
-    public  Comments toComment(CommentRequest commentRequest) {
+
+    public Comments toComment(CommentRequest commentRequest) {
         Comments comments = new Comments();
         comments.setContent(commentRequest.getContent());
-        Task task = taskRepository.findById(commentRequest.getTaskId()).orElseThrow(()-> new ResourceNotFoundException("Invalid Task id"));
+        Task task = taskRepository.findById(commentRequest.getTaskId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Task id"));
         comments.setTask(task);
         return comments;
     }

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(scanBasePackages = "com.todo.**")
-@EnableJpaRepositories(basePackages = {"com.todo.dao","com.todo.security.token"})
+@EnableJpaRepositories(basePackages = {"com.todo.dao", "com.todo.security.token"})
 @EnableScheduling
 public class TodoLauncher {
 

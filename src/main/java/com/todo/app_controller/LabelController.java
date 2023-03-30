@@ -41,7 +41,6 @@ public class LabelController {
     }
 
 
-
     @PutMapping("/{id}")
     public SuccessResponse updateLabel(@PathVariable Long id, @RequestBody @Valid LabelRequest labelRequest) {
         LabelResponse label = labelService.updateLabel(id, labelRequest);
@@ -51,6 +50,6 @@ public class LabelController {
     @DeleteMapping("/{id}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
     public SuccessResponse deleteLabel(@PathVariable Long id) {
-       return new SuccessResponse().deleted(labelService.deleteLabel(id), Label.class);
+        return new SuccessResponse().deleted(labelService.deleteLabel(id), Label.class);
     }
 }

@@ -10,12 +10,12 @@ public class ResourceNotFoundException extends RuntimeException {
     private String message;
     private Object stackTace;
 
-    public ResourceNotFoundException(int code, String message){
+    public ResourceNotFoundException(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResourceNotFoundException(String message){
+    public ResourceNotFoundException(String message) {
         this.message = message;
     }
 }

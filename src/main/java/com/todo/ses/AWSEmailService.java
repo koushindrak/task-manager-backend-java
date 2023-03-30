@@ -21,8 +21,8 @@ public class AWSEmailService {
     public void sendEmail(EmailRequest emailRequest) throws Exception {
 
         List<EmailTask> tasks = new ArrayList<>();
-        tasks.add(new EmailTask("Task 1",  new LocalDate(),  "Group 1", "Project 1"));
-        tasks.add(new EmailTask("Task 2",  new LocalDate(),  "Group 2", "Project 2"));
+        tasks.add(new EmailTask("Task 1", new LocalDate(), "Group 1", "Project 1"));
+        tasks.add(new EmailTask("Task 2", new LocalDate(), "Group 2", "Project 2"));
 
         // Create a Thymeleaf context with the tasks list as a variable
         Context context = new Context();

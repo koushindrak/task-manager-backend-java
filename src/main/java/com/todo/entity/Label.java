@@ -1,6 +1,5 @@
 package com.todo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,13 +9,13 @@ import java.util.Set;
 @Entity
 @Table(name = "labels")
 @Data
-public class Label extends ParentEntity{
+public class Label extends ParentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20,nullable = false)
+    @Column(length = 20, nullable = false)
     private String name;
 
     @Column(length = 100)

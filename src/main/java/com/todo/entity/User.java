@@ -28,28 +28,28 @@ public class User extends ParentEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name",length = 50)
-    @Size(min = 3,max = 50)
+    @Column(name = "first_name", length = 50)
+    @Size(min = 3, max = 50)
     private String firstName;
 
-    @Column(name = "last_name",length = 50)
+    @Column(name = "last_name", length = 50)
     private String lastName = CommonConstants.EMPTY_STRING;
 
-    @Column(nullable = false, unique = true,length = 100)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "phone_number",length = 12)
+    @Column(name = "phone_number", length = 12)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role",columnDefinition = "ENUM('ADMIN', 'USER')")
+    @Column(name = "role", columnDefinition = "ENUM('ADMIN', 'USER')")
     private Role role;
 
     /// mapping-   users-groups==> M2M, user-labels==> 12M, user-tokens==> 12M
-   // @ManyToMany // will be having users_groups table
+    // @ManyToMany // will be having users_groups table
 //    @JsonIgnoreProperties("users")
     @ManyToMany
     @JoinTable(name = "groups_users", joinColumns =

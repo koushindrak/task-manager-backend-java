@@ -12,19 +12,19 @@ import org.springframework.security.config.annotation.authentication.configurati
 @RequiredArgsConstructor
 public class AuthManager {
 
-  private final UserDetailsBean userDetailsBean;
+    private final UserDetailsBean userDetailsBean;
 
-  @Bean
-  public AuthenticationProvider authenticationProvider() {
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(userDetailsBean.userDetailsService());
-    authProvider.setPasswordEncoder(PasswordConfig.passwordEncoder());
-    return authProvider;
-  }
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsBean.userDetailsService());
+        authProvider.setPasswordEncoder(PasswordConfig.passwordEncoder());
+        return authProvider;
+    }
 
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-    return config.getAuthenticationManager();
-  }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 
 }

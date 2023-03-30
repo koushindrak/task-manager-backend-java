@@ -16,17 +16,17 @@ public class LabelUtils {
 
     private final UserRepository userRepository;
 
+    public static LabelResponse toLabelResponse(Label label) {
+        LabelResponse labelResponse = new LabelResponse();
+        BeanUtils.copyProperties(label, labelResponse);
+        return labelResponse;
+    }
+
     public Label toLabel(LabelRequest labelRequest) {
         Label label = new Label();
-        BeanUtils.copyProperties(labelRequest,label);
+        BeanUtils.copyProperties(labelRequest, label);
         User currentUser = userRepository.findById(ExecutionContext.get().getUsercontext().id()).get();
         label.setUser(currentUser);
         return label;
-    }
-
-    public static LabelResponse toLabelResponse(Label label) {
-        LabelResponse labelResponse = new LabelResponse();
-        BeanUtils.copyProperties(label,labelResponse);
-        return labelResponse;
     }
 }

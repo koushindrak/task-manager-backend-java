@@ -4,8 +4,8 @@ import com.todo.a_utils.GroupUtils;
 import com.todo.a_utils.UserUtils;
 import com.todo.dao.GroupRepository;
 import com.todo.dao.UserRepository;
-import com.todo.dto.response.GroupResponse;
 import com.todo.dto.request.GroupUserRequest;
+import com.todo.dto.response.GroupResponse;
 import com.todo.dto.response.UserResponse;
 import com.todo.entity.Group;
 import com.todo.entity.User;
@@ -38,12 +38,12 @@ public class GroupUserService {
 
     public List<UserResponse> getUserByGroup(Long groupId) {
         validateGroup(groupId);
-        List<User> users =userRepository.findAllByGroups_IdAndGroups_ownerId(groupId, getLoggedInUserId());
+        List<User> users = userRepository.findAllByGroups_IdAndGroups_ownerId(groupId, getLoggedInUserId());
         return users.stream().map(UserUtils::toUserResponse).collect(Collectors.toList());
     }
 
     public List<GroupResponse> getGroupsByUser() {
-        List<Group> groups = groupRepository.findGroupsByOwnerIdOrUsers_Id(getLoggedInUserId(),getLoggedInUserId());
+        List<Group> groups = groupRepository.findGroupsByOwnerIdOrUsers_Id(getLoggedInUserId(), getLoggedInUserId());
         return groups.stream().map(GroupUtils::toGroupResponse).collect(Collectors.toList());
     }
 
@@ -52,11 +52,11 @@ public class GroupUserService {
     private void validateUserGroup(GroupUserRequest groupUserRequest) {
         validateGroup(groupUserRequest.groupId());
         userRepository.findById(groupUserRequest.userId())
-                .orElseThrow(()->new ResourceNotFoundException("Invalid User Id"));
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid User Id"));
     }
 
     private void validateGroup(Long groupId) {
         groupRepository.findById(groupId)
-                .orElseThrow(()-> new ResourceNotFoundException("Invalid Group Id"));
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid Group Id"));
     }
 }

@@ -33,26 +33,26 @@ public class ProjectService {
     public List<ProjectResponse> getAllProjects() {
         List<Project> projects = projectRepository.getProjectsByUser_Id(CommonUtils.getLoggedInUserId());
         return projects.stream()
-                .map(project ->  projectUtils.toProjectResponse(project))
+                .map(project -> projectUtils.toProjectResponse(project))
                 .collect(Collectors.toList());
     }
 
     public ProjectResponse getProjectById(Long id) {
-        Project project = projectRepository.findProjectByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+        Project project = projectRepository.findProjectByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
         return projectUtils.toProjectResponse(project);
     }
 
     public ProjectResponse updateProject(Long id, ProjectRequest projectRequest) {
-        Project project = projectRepository.findProjectByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+        Project project = projectRepository.findProjectByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
-        BeanUtils.copyProperties(projectRequest,project);
+        BeanUtils.copyProperties(projectRequest, project);
         projectRepository.save(project);
         return projectUtils.toProjectResponse(project);
     }
 
     public ProjectResponse deleteProject(Long id) {
-        Project project = projectRepository.findProjectByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+        Project project = projectRepository.findProjectByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
         projectRepository.delete(project);
         return projectUtils.toProjectResponse(project);

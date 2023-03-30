@@ -6,9 +6,9 @@ import org.springframework.beans.BeanUtils;
 
 public class UserUtils {
 
-    public static UserResponse toUserResponse(User user){
+    public static UserResponse toUserResponse(User user) {
         UserResponse userResponse = new UserResponse();
-        BeanUtils.copyProperties(user,userResponse);
+        BeanUtils.copyProperties(user, userResponse);
         return userResponse;
     }
 }

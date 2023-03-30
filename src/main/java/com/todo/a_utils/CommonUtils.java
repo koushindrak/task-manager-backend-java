@@ -1,13 +1,10 @@
 package com.todo.a_utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.todo.constants.Role;
 import com.todo.context.ExecutionContext;
 import com.todo.dao.UserRepository;
 import com.todo.entity.User;
-import com.todo.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,8 +17,8 @@ import java.util.UUID;
 @Slf4j
 public class CommonUtils {
 
-    private final UserRepository userRepository;
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    private final UserRepository userRepository;
 
     public static String generateUUID() {
         return UUID.randomUUID().toString().replaceAll("-", "");
@@ -39,12 +36,6 @@ public class CommonUtils {
         return ExecutionContext.get().getUsercontext().id();
     }
 
-    public User getCurrentUser(){
-        User user= userRepository.findByEmail(ExecutionContext.get().getUsercontext().email()).get();
-//        user.setGroupRoles(null);
-        return user;
-    }
-
     public static void printJson(Object obj) {
 //        try {
 //            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -54,5 +45,11 @@ public class CommonUtils {
 //        } catch (JsonProcessingException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    public User getCurrentUser() {
+        User user = userRepository.findByEmail(ExecutionContext.get().getUsercontext().email()).get();
+//        user.setGroupRoles(null);
+        return user;
     }
 }

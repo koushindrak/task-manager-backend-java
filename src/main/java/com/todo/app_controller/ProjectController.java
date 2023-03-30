@@ -40,7 +40,6 @@ public class ProjectController {
     }
 
 
-
     @PutMapping("/{id}")
     public SuccessResponse<ProjectResponse> updateProject(@PathVariable Long id, @RequestBody @Valid ProjectRequest projectRequest) {
         ProjectResponse project = projectService.updateProject(id, projectRequest);

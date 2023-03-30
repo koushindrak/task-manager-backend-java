@@ -16,9 +16,9 @@ public class ProjectUtils {
 
     private final UserRepository userRepository;
 
-    public  Project toProject(ProjectRequest projectRequest) {
+    public Project toProject(ProjectRequest projectRequest) {
         Project project = new Project();
-        BeanUtils.copyProperties(projectRequest,project);
+        BeanUtils.copyProperties(projectRequest, project);
         User user = userRepository.findById(ExecutionContext.get().getUsercontext().id()).get();
         project.setUser(user);
         return project;
@@ -26,8 +26,8 @@ public class ProjectUtils {
 
     public ProjectResponse toProjectResponse(Project project) {
         ProjectResponse projectResponse = new ProjectResponse();
-         BeanUtils.copyProperties(project, projectResponse);
-         projectResponse.setStatus(project.getStatus().name());
-         return projectResponse;
+        BeanUtils.copyProperties(project, projectResponse);
+        projectResponse.setStatus(project.getStatus().name());
+        return projectResponse;
     }
 }

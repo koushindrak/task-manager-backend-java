@@ -20,25 +20,26 @@ public class TaskLabelController {
     private final TaskLabelService taskLabelService;
 
     @PutMapping("/add-label")
-    public SuccessResponse addLabelOnTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest){
+    public SuccessResponse addLabelOnTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest) {
         taskLabelService.addLabelOnTask(taskLabelRequest);
         return new SuccessResponse().updated("Label added to task ", Task.class);
     }
 
     @PutMapping("/remove-label")
-    public SuccessResponse removeLabelFromTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest){
+    public SuccessResponse removeLabelFromTask(@Valid @RequestBody TaskLabelRequest taskLabelRequest) {
         taskLabelService.removeLabelFromTask(taskLabelRequest);
         return new SuccessResponse().updated("Label Removed from task ", Task.class);
     }
+
     @GetMapping("/task-by-label")
-    public SuccessResponse getTaskByLabel(@RequestParam Long labelId){
+    public SuccessResponse getTaskByLabel(@RequestParam Long labelId) {
         List<TaskResponse> taskResponses = taskLabelService.getTasksByLabel(labelId);
-        return new SuccessResponse().retrieved(taskResponses,Task.class);
+        return new SuccessResponse().retrieved(taskResponses, Task.class);
     }
 
     @GetMapping("/label-by-task")
-    public SuccessResponse getLabelsByTask(@RequestParam Long taskId){
+    public SuccessResponse getLabelsByTask(@RequestParam Long taskId) {
         List<LabelResponse> labelResponses = taskLabelService.getLabelsByTask(taskId);
-        return new SuccessResponse().retrieved(labelResponses,Task.class);
+        return new SuccessResponse().retrieved(labelResponses, Task.class);
     }
 }

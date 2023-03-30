@@ -27,6 +27,7 @@ public class GroupService {
         group = groupRepository.save(group);
         return toGroupResponse(group);
     }
+
     public List<GroupResponse> getAllGroups() {
         List<Group> groups = groupRepository.findAllByOwnerId(getLoggedInUserId());
         return groups.stream()
@@ -35,22 +36,22 @@ public class GroupService {
     }
 
     public GroupResponse getGroupById(Long id) {
-        Group group = groupRepository.findGroupByIdAndOwnerIdWithUsers(id,getLoggedInUserId())
-                .orElseThrow(() -> new ResourceNotFoundException(101,"Group not found with id " + id));
+        Group group = groupRepository.findGroupByIdAndOwnerIdWithUsers(id, getLoggedInUserId())
+                .orElseThrow(() -> new ResourceNotFoundException(101, "Group not found with id " + id));
         return toGroupResponse(group);
     }
 
     public GroupResponse updateGroup(Long id, GroupRequest updateRequest) {
-        Group group=groupRepository.findGroupByIdAndOwnerIdWithUsers(id,getLoggedInUserId())
-                .orElseThrow(() -> new ResourceNotFoundException(101,"Only Group owner can update/delete the group"));
+        Group group = groupRepository.findGroupByIdAndOwnerIdWithUsers(id, getLoggedInUserId())
+                .orElseThrow(() -> new ResourceNotFoundException(101, "Only Group owner can update/delete the group"));
 
-        toGroup(group,updateRequest);
+        toGroup(group, updateRequest);
         groupRepository.save(group);
         return toGroupResponse(group);
     }
 
     public void deleteGroup(Long id) {
-        groupRepository.deleteGroupByIdAndOwnerId(id,getLoggedInUserId());
+        groupRepository.deleteGroupByIdAndOwnerId(id, getLoggedInUserId());
     }
 
 }

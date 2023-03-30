@@ -19,11 +19,11 @@ public class ProjectRequest {
     private String description;
 
     @FutureOrPresent(message = "Project start date can be Present or Future dates only")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private Date startDate;
 
     @Future(message = "Project start date can be Future dates only")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private Date endDate;
 
     @NotNull(message = "Project status can be ACTIVE or INACTIVE")

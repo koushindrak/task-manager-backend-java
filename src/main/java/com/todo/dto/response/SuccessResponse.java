@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public class SuccessResponse<T> {
     private String message;
-    private T data ;
+    private T data;
     private Integer httpStatus = 200;
 
     public SuccessResponse<T> created(T data, Class entity) {
@@ -31,7 +31,7 @@ public class SuccessResponse<T> {
         return getSuccessResponse(data, entity, action);
     }
 
-    public SuccessResponse<T> ok(){
+    public SuccessResponse<T> ok() {
         SuccessResponse<T> success = new SuccessResponse<T>();
         success.setHttpStatus(httpStatus);
         success.setData(data);
@@ -39,7 +39,7 @@ public class SuccessResponse<T> {
         return success;
     }
 
-    public SuccessResponse<T> ok(String message){
+    public SuccessResponse<T> ok(String message) {
         SuccessResponse<T> success = new SuccessResponse<T>();
         success.setHttpStatus(httpStatus);
         success.setMessage(message);

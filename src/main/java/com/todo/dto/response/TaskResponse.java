@@ -14,7 +14,7 @@ public class TaskResponse {
 
     private String description;
 
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dueDate;
 
     private List<TaskLabelResponse> labels;

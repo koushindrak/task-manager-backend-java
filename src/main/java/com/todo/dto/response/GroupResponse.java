@@ -1,6 +1,5 @@
 package com.todo.dto.response;
 
-import com.todo.entity.Group;
 import lombok.Getter;
 import lombok.Setter;
 

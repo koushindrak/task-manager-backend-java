@@ -3,7 +3,6 @@ package com.todo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 
 import java.sql.Timestamp;
 
@@ -20,10 +19,10 @@ public class Notification {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     private String description;
 
-    @Column(name="message" , length = 65535, columnDefinition="TEXT",nullable = false,updatable = false)
+    @Column(name = "message", length = 65535, columnDefinition = "TEXT", nullable = false, updatable = false)
     private String message;
 
     @ManyToOne

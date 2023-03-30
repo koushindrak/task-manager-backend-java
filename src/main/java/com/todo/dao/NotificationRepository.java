@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification,Long> {
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
 //    private Long id;
 //    private String description;
@@ -21,14 +21,14 @@ public interface NotificationRepository extends JpaRepository<Notification,Long>
 //    private String groupName;
 
     @Query(value = """
-                    select n.id as id , n.action, n.createdAt as sentAt,
-                     t.due_date as taskDueDate , p.name as projectName, g.name as groupName 
-                    from notifications n
-                                join tasks t on n.task_id = t.id 
-                                join projects p on t.project_id = p.id
-                                join group_details g on t.group_id = g.id
-                                where t.user_id =:userId
-                    """,nativeQuery = true)
-    public List<NotificationResponse> getNotificationsByUserId(@Param("userId") Long uId);
+            select n.id as id , n.action, n.createdAt as sentAt,
+             t.due_date as taskDueDate , p.name as projectName, g.name as groupName 
+            from notifications n
+                        join tasks t on n.task_id = t.id 
+                        join projects p on t.project_id = p.id
+                        join group_details g on t.group_id = g.id
+                        where t.user_id =:userId
+            """, nativeQuery = true)
+    List<NotificationResponse> getNotificationsByUserId(@Param("userId") Long uId);
 
 }

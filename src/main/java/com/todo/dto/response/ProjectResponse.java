@@ -1,8 +1,6 @@
 package com.todo.dto.response;
 
-import com.todo.entity.Project;
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 

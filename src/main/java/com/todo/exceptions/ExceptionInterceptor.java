@@ -24,14 +24,15 @@ public class ExceptionInterceptor {
     @ResponseBody
     public final ErrorResponse handleDuplicateException(SQLIntegrityConstraintViolationException ex) {
         ex.printStackTrace();
-      return errorResponse.failure(ErrorCode.DUPLICATE_COLUMN_EXCEPTION,HttpStatus.BAD_REQUEST, ex);
+        return errorResponse.failure(ErrorCode.DUPLICATE_COLUMN_EXCEPTION, HttpStatus.BAD_REQUEST, ex);
     }
+
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = {ResourceNotFoundException.class})
     @ResponseBody
     public final ErrorResponse handleValidationExceptions(ResourceNotFoundException ex) {
         ex.printStackTrace();
-        return errorResponse.failure(ErrorCode.INVALID_INPUT_GIVEN,HttpStatus.BAD_REQUEST,ex);
+        return errorResponse.failure(ErrorCode.INVALID_INPUT_GIVEN, HttpStatus.BAD_REQUEST, ex);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -39,7 +40,7 @@ public class ExceptionInterceptor {
     @ResponseBody
     public final ErrorResponse handleValidationExceptions(ValidationException ex) {
         ex.printStackTrace();
-        return errorResponse.failure(ErrorCode.INVALID_INPUT_GIVEN,HttpStatus.BAD_REQUEST,ex);
+        return errorResponse.failure(ErrorCode.INVALID_INPUT_GIVEN, HttpStatus.BAD_REQUEST, ex);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -47,7 +48,7 @@ public class ExceptionInterceptor {
     @ResponseBody
     public final ErrorResponse exception(ServletRequestBindingException ex) {
         ex.printStackTrace();
-        return errorResponse.failure(ErrorCode.INVALID_SERVELET_REQUEST,HttpStatus.BAD_REQUEST,ex);
+        return errorResponse.failure(ErrorCode.INVALID_SERVELET_REQUEST, HttpStatus.BAD_REQUEST, ex);
     }
 
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
@@ -55,7 +56,7 @@ public class ExceptionInterceptor {
     @ResponseBody
     public final ErrorResponse exception(AuthenticationException ex) {
         ex.printStackTrace();
-        return errorResponse.failure(ErrorCode.UNAUTHORIZED,HttpStatus.BAD_REQUEST,ex);
+        return errorResponse.failure(ErrorCode.UNAUTHORIZED, HttpStatus.BAD_REQUEST, ex);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -63,6 +64,6 @@ public class ExceptionInterceptor {
     @ResponseBody
     public final ErrorResponse exception(Exception ex) {
         ex.printStackTrace();
-        return errorResponse.failure(ErrorCode.UNHANDLED_EXCEPTION,HttpStatus.BAD_REQUEST, ex);
+        return errorResponse.failure(ErrorCode.UNHANDLED_EXCEPTION, HttpStatus.BAD_REQUEST, ex);
     }
 }

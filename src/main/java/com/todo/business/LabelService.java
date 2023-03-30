@@ -28,37 +28,37 @@ public class LabelService {
         Label label = labelUtils.toLabel(labelRequest);
         label.setUser(commonUtils.getCurrentUser());
         label = labelRepository.save(label);
-        return labelUtils.toLabelResponse(label);
+        return LabelUtils.toLabelResponse(label);
     }
 
     public List<LabelResponse> getAllLabels() {
         List<Label> labels = labelRepository.findAllByUser_Id(CommonUtils.getLoggedInUserId());
-        labels.forEach(label -> log.info("labelid-"+label.getId()+" Tasks are--"+label.getTasks()));
+        labels.forEach(label -> log.info("labelid-" + label.getId() + " Tasks are--" + label.getTasks()));
 
         return labels.stream()
-                .map(label ->  labelUtils.toLabelResponse(label))
+                .map(label -> LabelUtils.toLabelResponse(label))
                 .collect(Collectors.toList());
     }
 
     public LabelResponse getLabelById(Long id) {
         Label label = labelRepository.findLabelByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Label not found with id: " + id));
-        return labelUtils.toLabelResponse(label);
+        return LabelUtils.toLabelResponse(label);
     }
 
     public LabelResponse updateLabel(Long id, LabelRequest labelRequest) {
         Label label = labelRepository.findLabelByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Label not found with id: " + id));
-        BeanUtils.copyProperties(labelRequest,label);
+        BeanUtils.copyProperties(labelRequest, label);
         labelRepository.save(label);
-        return labelUtils.toLabelResponse(label);
+        return LabelUtils.toLabelResponse(label);
     }
 
     public LabelResponse deleteLabel(Long id) {
-      Label label = labelRepository.findLabelByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
-              .orElseThrow(() -> new EntityNotFoundException("Label not found with id: " + id));
-      labelRepository.delete(label);
-      return LabelUtils.toLabelResponse(label);
+        Label label = labelRepository.findLabelByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
+                .orElseThrow(() -> new EntityNotFoundException("Label not found with id: " + id));
+        labelRepository.delete(label);
+        return LabelUtils.toLabelResponse(label);
 
     }
 }

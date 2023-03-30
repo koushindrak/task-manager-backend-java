@@ -24,7 +24,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
                 response.setStatus(HttpStatus.FORBIDDEN.value());
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid Authorization header");
 
-               // response.getWriter().write("{ \"error\": \"User is not authorized.\"}");
+                // response.getWriter().write("{ \"error\": \"User is not authorized.\"}");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

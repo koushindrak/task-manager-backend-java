@@ -12,9 +12,10 @@ public class UserResponse {
     private String email;
     private String phoneNumber;
 
-    public UserResponse(){
+    public UserResponse() {
     }
-    public UserResponse(User user){
-        BeanUtils.copyProperties(user,this);
+
+    public UserResponse(User user) {
+        BeanUtils.copyProperties(user, this);
     }
 }

@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-  private final AuthenticationService service;
+    private final AuthenticationService service;
 
-  @PostMapping("/signup")
-  public SuccessResponse register(@Valid @RequestBody RegisterRequest request) {
-    service.register(request);
-    return new SuccessResponse().created("User Registered Successfully!!!", User.class);
-  }
-  @PostMapping("/signin")
-  public SuccessResponse<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
-    return new SuccessResponse<AuthenticationResponse>().retrieved(service.authenticate(request), User.class);
-  }
+    @PostMapping("/signup")
+    public SuccessResponse register(@Valid @RequestBody RegisterRequest request) {
+        service.register(request);
+        return new SuccessResponse().created("User Registered Successfully!!!", User.class);
+    }
+
+    @PostMapping("/signin")
+    public SuccessResponse<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
+        return new SuccessResponse<AuthenticationResponse>().retrieved(service.authenticate(request), User.class);
+    }
 
 
 }

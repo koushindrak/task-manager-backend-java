@@ -1,8 +1,6 @@
 package com.todo.dao;
 
 import com.todo.entity.Group;
-import com.todo.entity.Task;
-import com.todo.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,6 +35,6 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
     @Transactional
     void removeUserFromGroup(@Param("groupId") Long gid, @Param("userId") Long mid);
 
-    List<Group> findGroupsByOwnerIdOrUsers_Id(Long ownerId,Long userId);
+    List<Group> findGroupsByOwnerIdOrUsers_Id(Long ownerId, Long userId);
 
 }

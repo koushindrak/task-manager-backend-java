@@ -1,5 +1,5 @@
 package com.todo.constants;
 
 public enum TaskType {
-    RECURRING,ONE_TIME
+    RECURRING, ONE_TIME
 }

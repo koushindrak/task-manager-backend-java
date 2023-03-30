@@ -23,9 +23,9 @@ public class JavaMailService {
         // Create a Thymeleaf context with the tasks list as a variable
 
         List<EmailTask> tasks = new ArrayList<>();
-        tasks.add(new EmailTask("Task 1", new LocalDate(),  "Group 1", "Project 1"));
-        tasks.add(new EmailTask("Task 2",  new LocalDate(),  "Group 2", "Project 2"));
-        tasks.add(new EmailTask("Task 3",  new LocalDate(),  "Group 3", "Project 3"));
+        tasks.add(new EmailTask("Task 1", new LocalDate(), "Group 1", "Project 1"));
+        tasks.add(new EmailTask("Task 2", new LocalDate(), "Group 2", "Project 2"));
+        tasks.add(new EmailTask("Task 3", new LocalDate(), "Group 3", "Project 3"));
 
         Context context = new Context();
         context.setVariable("tasks", tasks);

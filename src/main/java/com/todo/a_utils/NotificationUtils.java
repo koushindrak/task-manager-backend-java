@@ -19,7 +19,7 @@ public class NotificationUtils {
             notificationResponse.setTaskDueDate(notification.getTask().getDueDate());
 
             notificationResponse.setGroupName(notification.getTask().getGroup() == null ? "-" : notification.getTask().getGroup().getName());
-            notificationResponse.setProjectName(notification.getTask().getProject() == null?"-":notification.getTask().getProject().getName());
+            notificationResponse.setProjectName(notification.getTask().getProject() == null ? "-" : notification.getTask().getProject().getName());
             notificationResponses.add(notificationResponse);
         });
         return notificationResponses;

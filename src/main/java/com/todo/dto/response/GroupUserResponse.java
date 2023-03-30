@@ -1,7 +1,7 @@
 package com.todo.dto.response;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record GroupUserResponse(@NotBlank Long groupId, @NotBlank Long userId) {
+public record GroupUserResponse(@NotNull Long groupId, @NotNull Long userId) {
 
 }
