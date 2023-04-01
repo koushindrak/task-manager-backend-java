@@ -4,16 +4,27 @@ import com.todo.constants.Role;
 import com.todo.dao.UserRepository;
 import com.todo.entity.LoginDetails;
 import com.todo.entity.User;
+import com.todo.exceptions.AuthenticationException;
 import com.todo.exceptions.ResourceNotFoundException;
 import com.todo.security.config.JwtService;
 import com.todo.security.token.TokenRepository;
 import com.todo.security.token.TokenType;
+import com.todo.ses.JavaMailService;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,22 +35,65 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final JavaMailService javaMailService;
+    private final UserRepository userRepository;
 
-    public User register(RegisterRequest request) {
+    public void register(RegisterRequest request, HttpServletRequest httpServletRequest) {
+        Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
+        if (optionalUser.isPresent()) {
+            if (!optionalUser.get().isEnabled()) {
+                userRepository.delete(optionalUser.get());
+            }
+        }
+
+        String randomCode = RandomStringUtils.random(64, true, true);
+
         var user = User.builder()
                 .firstName(request.getFirstname())
                 .lastName(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .verificationCode(randomCode)
+                .enabled(false)
                 .build();
-        var savedUser = repository.save(user);
-        return savedUser;
-        // var jwtToken = jwtService.generateToken(user);
-        //saveUserToken(savedUser, jwtToken);
-//    return AuthenticationResponse.builder()
-//        .token(jwtToken)
-//        .build();
+
+        repository.save(user);
+        try {
+            javaMailService.sendVerificationEmail(user, getSiteURL(httpServletRequest));
+        } catch (MessagingException e) {
+            log.info("===== EXCEPTION WHILE SENDING VERIFICATION EMAIL-1 ===== ", e);
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            log.info("===== EXCEPTION WHILE SENDING VERIFICATION EMAIL-2 ===== ", e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    }
+
+    public void verify(String verificationCode) {
+        User user = userRepository.findByVerificationCode(verificationCode);
+        if (Objects.isNull(user)) {
+            throw new AuthenticationException(401, "Invalid verification code");
+        }
+        if (user.isEnabled()) {
+            throw new AuthenticationException(401, "Verification code is already used");
+        }
+        if (ChronoUnit.MINUTES.between(user.getCreatedAt().toInstant(), Instant.now()) > 2) {
+            user.setVerificationCodeExpired(true);
+            user.setEnabled(false);
+            userRepository.save(user);
+            throw new AuthenticationException(401, "Verification Code is expired");
+        }
+
+        user.setVerificationCodeExpired(true);
+        user.setEnabled(true);
+        userRepository.save(user);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -85,4 +139,6 @@ public class AuthenticationService {
         });
         tokenRepository.saveAll(validUserTokens);
     }
+
+
 }

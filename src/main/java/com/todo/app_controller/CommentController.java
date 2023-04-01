@@ -10,7 +10,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "7-Comment Controller",description = "Used for comments cruds for tasks")
+@Tag(name = "7-Comment Controller", description = "Used for comments cruds for tasks")
 @RestController
 @RequestMapping("/api/v1/comments")
 @AllArgsConstructor

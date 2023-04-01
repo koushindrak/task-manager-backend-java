@@ -4,4 +4,6 @@ http://localhost:2612/v3/api-docs
 https://docs.spring.io/spring-boot/docs/current/reference/html/dependency-versions.html#appendix.dependency-versions.coordinates
 http://localhost:2612/swagger-ui/index.html
 https://www.baeldung.com/jpa-size-length-column-differences
+https://www.codejava.net/frameworks/spring-boot/email-verification-example
+https://www.bezkoder.com/spring-boot-security-jwt/
 

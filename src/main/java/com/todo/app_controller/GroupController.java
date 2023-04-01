@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "3-Group Controller",description = "Used for group crud")
+@Tag(name = "3-Group Controller", description = "Used for group crud")
 @RestController
 @RequestMapping("/api/v1/groups")
 @AllArgsConstructor

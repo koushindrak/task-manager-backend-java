@@ -44,6 +44,14 @@ public class User extends ParentEntity implements UserDetails {
     @Column(name = "phone_number", length = 12)
     private String phoneNumber;
 
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    @Column(name = "code_expired")
+    private boolean verificationCodeExpired = false;
+
+    private boolean enabled = false;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role", columnDefinition = "ENUM('ADMIN', 'USER')")
     private Role role;
@@ -103,7 +111,7 @@ public class User extends ParentEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     @Override

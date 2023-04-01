@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "5-Task-Controller",description = "Task can be linked with Groups, Projects, Labels")
+@Tag(name = "5-Task-Controller", description = "Task can be linked with Groups, Projects, Labels")
 @RestController
 @RequestMapping("/api/v1/tasks")
 @AllArgsConstructor

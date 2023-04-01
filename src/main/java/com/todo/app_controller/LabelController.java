@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name="2-Label Controller",description = "Used for creating Labels, further lables can be linked with tasks")
+@Tag(name = "2-Label Controller", description = "Used for creating Labels, further lables can be linked with tasks")
 @RestController
 @RequestMapping("/api/v1/labels")
 @AllArgsConstructor

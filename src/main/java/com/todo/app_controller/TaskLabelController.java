@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "6- Task Label Controller",description = "Used for assigning,removing and views labels for task")
+@Tag(name = "6- Task Label Controller", description = "Used for assigning,removing and views labels for task")
 @RestController
 @RequestMapping("/api/v1/tasks-labels")
 @AllArgsConstructor

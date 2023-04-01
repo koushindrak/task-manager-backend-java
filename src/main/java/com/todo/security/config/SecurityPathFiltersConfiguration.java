@@ -39,6 +39,8 @@ public class SecurityPathFiltersConfiguration {
                 .requestMatchers("/v3/api-docs.yml").permitAll()
                 .requestMatchers("/api-docs/**").permitAll()
                 .requestMatchers("/users/**").permitAll()
+                .requestMatchers("/api/v1/auth/verify/**").permitAll()
+                .requestMatchers("/ping/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
