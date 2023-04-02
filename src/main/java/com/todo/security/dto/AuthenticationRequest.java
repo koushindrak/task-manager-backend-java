@@ -1,4 +1,4 @@
-package com.todo.security.auth;
+package com.todo.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class AuthenticationRequest {
 
     String password;
-    private String email;
+    private String username;
+//    private String email;
 }

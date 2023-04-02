@@ -1,4 +1,4 @@
-package com.todo.security.config;
+package com.todo.security.service;
 
 import com.todo.security.token.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;

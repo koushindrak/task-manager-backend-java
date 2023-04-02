@@ -2,8 +2,9 @@ package com.todo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.todo.constants.CommonConstants;
-import com.todo.constants.Role;
+import com.todo.constants.ERole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +36,11 @@ public class User extends ParentEntity implements UserDetails {
     @Column(name = "last_name", length = 50)
     private String lastName = CommonConstants.EMPTY_STRING;
 
+    @NotBlank(message = "username can not be blank")
+    @Size(max = 20)
+    @Column(length = 20, unique = true)
+    private String username;
+
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
@@ -54,7 +60,14 @@ public class User extends ParentEntity implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", columnDefinition = "ENUM('ADMIN', 'USER')")
-    private Role role;
+    private ERole role;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     /// mapping-   users-groups==> M2M, user-labels==> 12M, user-tokens==> 12M
     // @ManyToMany // will be having users_groups table
@@ -68,7 +81,7 @@ public class User extends ParentEntity implements UserDetails {
     @JsonIgnoreProperties("user")
     private Set<Label> labels = new HashSet<>();
 
-    @OneToMany(mappedBy = "user") // will be having user_id on many side, i.e in login_details table
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE) // will be having user_id on many side, i.e in login_details table
     @JsonIgnoreProperties("user")
     private List<LoginDetails> tokens;
 
@@ -91,7 +104,7 @@ public class User extends ParentEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.todo.exceptions;
 
-public class ValidationException extends ApiException {
-    public ValidationException(int code, String message) {
-        super(code, message);
-    }
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class ValidationException extends RuntimeException {
+    private String message;
 }

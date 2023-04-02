@@ -19,8 +19,11 @@
 
 package com.todo.exceptions;
 
-public class AuthenticationException extends ApiException {
-    public AuthenticationException(int code, String message) {
-        super(code, message);
-    }
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class AuthenticationException extends RuntimeException {
+    private String message;
 }

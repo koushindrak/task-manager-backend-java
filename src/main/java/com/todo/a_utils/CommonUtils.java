@@ -1,7 +1,7 @@
 package com.todo.a_utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.todo.constants.Role;
+import com.todo.constants.ERole;
 import com.todo.context.ExecutionContext;
 import com.todo.dao.UserRepository;
 import com.todo.entity.User;
@@ -28,7 +28,7 @@ public class CommonUtils {
         return Calendar.getInstance().getTimeInMillis();
     }
 
-    public static Role getRoleOfLoggedInUser() {
+    public static ERole getRoleOfLoggedInUser() {
         return ExecutionContext.get().getUsercontext().role();
     }
 

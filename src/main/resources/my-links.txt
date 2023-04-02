@@ -5,5 +5,10 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/dependency-versio
 http://localhost:2612/swagger-ui/index.html
 https://www.baeldung.com/jpa-size-length-column-differences
 https://www.codejava.net/frameworks/spring-boot/email-verification-example
-https://www.bezkoder.com/spring-boot-security-jwt/
+
+////// spring security
+https://www.bezkoder.com/spring-boot-security-jwt/  -- spring security important
+https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
+https://www.toptal.com/spring/spring-security-tutorial
+
 

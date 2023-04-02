@@ -1,4 +1,4 @@
-package com.todo.security.auth;
+package com.todo.config;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import io.swagger.v3.oas.models.Components;

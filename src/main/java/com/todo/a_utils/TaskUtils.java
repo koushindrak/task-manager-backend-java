@@ -9,7 +9,6 @@ import com.todo.entity.Group;
 import com.todo.entity.Label;
 import com.todo.entity.Project;
 import com.todo.entity.Task;
-import com.todo.exceptions.ErrorCode;
 import com.todo.exceptions.ResourceNotFoundException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +77,7 @@ public class TaskUtils {
         task.setDueDate(taskRequest.getDueDate());
         if (taskRequest.getGroupId() != null) {
             Group group = groupRepository.findById(taskRequest.getGroupId())
-                    .orElseThrow(() -> new ResourceNotFoundException(ErrorCode.INVALID_ID_GIVEN_FOR_RESOURCE, "Invalid group id"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Invalid group id"));
             task.setGroup(group);
         }
 
