@@ -39,6 +39,7 @@ public class TaskUtils {
         List<TaskLabelResponse> labels = new ArrayList<>();
         log.info("Labels for task id " + task.getId() + " are-" + task.getLabels());
         setLabels(task, taskResponse, labels);
+        taskResponse.setDueDate(task.getDueDate());
         taskResponse.setPriority(task.getPriority().name());
         setGroup(task, taskResponse);
         setProject(task, taskResponse);

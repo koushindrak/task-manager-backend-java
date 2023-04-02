@@ -4,6 +4,7 @@ import com.todo.context.ExecutionContext;
 import com.todo.context.UserContext;
 import com.todo.dao.UserRepository;
 import com.todo.entity.User;
+import com.todo.exceptions.AuthenticationException;
 import com.todo.security.service.UserDetailsServiceImpl;
 import com.todo.security.token.TokenRepository;
 import com.todo.security.utils.JwtUtils;
@@ -82,7 +83,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         logger.info("HEADER IS==== " + authHeader);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
+            throw new AuthenticationException("Invalid Header");
         }
       return authHeader.substring(7);
     }

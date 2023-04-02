@@ -9,9 +9,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -19,15 +17,18 @@ import java.util.List;
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class TaskRequest {
 
     @NotBlank(message = "Task name can not be blank")
     private String name;
+
     @Size(min = 0, max = 30)
     private String description;
 
     @FutureOrPresent(message = "Task can be created for Present or Future dates")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    @NotNull(message = "Due date is mandatory")
     private Date dueDate;
 
     @Schema(example = "1")
