@@ -12,4 +12,6 @@ public class CommentResponse {
     private Long taskId;
     private String content;
     private Date time;
+    private Long createrId;
+    private String createrName;
 }

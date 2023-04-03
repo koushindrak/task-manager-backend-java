@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "7-Comment Controller", description = "Used for comments cruds for tasks")
 @RestController
 @RequestMapping("/api/v1/comments")
@@ -17,6 +19,11 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
 
     private final CommentService commentService;
+
+    @GetMapping
+    public SuccessResponse<List<CommentResponse>> getCommentsByTaskId(@RequestParam Long taskId){
+        return new SuccessResponse<List<CommentResponse>>().retrieved(commentService.getCommentsByTaskId(taskId),Comments.class);
+    }
 
     @PostMapping
     public SuccessResponse<CommentResponse> createComment(@Valid @RequestBody CommentRequest commentRequest) {

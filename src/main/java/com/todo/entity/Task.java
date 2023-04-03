@@ -68,7 +68,6 @@ public class Task extends ParentEntity {
                 ", dueDate=" + dueDate +
                 ", taskStatus=" + taskStatus +
                 ", priority=" + priority +
-                ", labels=" + labels +
                 '}';
     }
 }

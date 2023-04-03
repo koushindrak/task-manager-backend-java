@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 @Setter
 @Getter
 public class SuccessResponse<T> {
-    private String message;
+    private String displayMessage;
     private T data;
 
     public SuccessResponse<T> created(T data, Class entity) {
@@ -33,20 +33,20 @@ public class SuccessResponse<T> {
     public SuccessResponse<T> ok() {
         SuccessResponse<T> success = new SuccessResponse<T>();
         success.setData(data);
-        success.setMessage("Request Completed SuccessFully");
+        success.setDisplayMessage("Request Completed SuccessFully");
         return success;
     }
 
     public SuccessResponse<T> ok(String message) {
         SuccessResponse<T> success = new SuccessResponse<T>();
-        success.setMessage(message);
+        success.setDisplayMessage(message);
         success.setData(data);
         return success;
     }
 
     public SuccessResponse<T> ok(T data, String message) {
         SuccessResponse<T> success = new SuccessResponse<T>();
-        success.setMessage(message);
+        success.setDisplayMessage(message);
         success.setData(data);
         return success;
     }
@@ -55,7 +55,7 @@ public class SuccessResponse<T> {
     private SuccessResponse<T> getSuccessResponse(T data, Class entity, String action) {
         SuccessResponse<T> success = new SuccessResponse<T>();
         success.setData(data);
-        success.setMessage(StringUtils.capitalize(entity.getSimpleName()) + action + "Successfully");
+        success.setDisplayMessage(StringUtils.capitalize(entity.getSimpleName()) + action + "Successfully");
         return success;
     }
 }

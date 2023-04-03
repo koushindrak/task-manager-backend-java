@@ -35,7 +35,7 @@ public class TaskUtils {
 
     public static TaskResponse toTaskResponse(Task task) {
         TaskResponse taskResponse = new TaskResponse();
-        BeanUtils.copyProperties(task, taskResponse);
+        BeanUtils.copyProperties(task, taskResponse,"labels");
         List<TaskLabelResponse> labels = new ArrayList<>();
         log.info("Labels for task id " + task.getId() + " are-" + task.getLabels());
         setLabels(task, taskResponse, labels);
