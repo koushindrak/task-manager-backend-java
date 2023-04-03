@@ -29,4 +29,7 @@ public class Notification {
     @JoinColumn(name = "task_id")
     private Task task;
 
+    @Column(nullable = false,name = "user_id")
+    private Long userId;
+
 }

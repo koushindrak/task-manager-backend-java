@@ -21,7 +21,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 //    private String groupName;
 
     @Query(value = """
-            select n.id as id , n.action, n.createdAt as sentAt,
+            select n.id as id , n.createdAt as sentAt,
              t.due_date as taskDueDate , p.name as projectName, g.name as groupName 
             from notifications n
                         join tasks t on n.task_id = t.id 
@@ -29,6 +29,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
                         join group_details g on t.group_id = g.id
                         where t.user_id =:userId
             """, nativeQuery = true)
-    List<NotificationResponse> getNotificationsByUserId(@Param("userId") Long uId);
+    List<NotificationResponse> getNotificationsByUserId1(@Param("userId") Long uId);
+
+    List<Notification> getNotificationsByUserId(Long userId);
 
 }

@@ -1,5 +1,6 @@
 package com.todo.ses;
 
+import com.todo.business.NotificationService;
 import com.todo.dao.TaskRepository;
 import com.todo.entity.Task;
 import lombok.AllArgsConstructor;
@@ -18,16 +19,19 @@ public class NotificationScheduler {
 
     private final TaskRepository taskRepository;
     private final JavaMailService javaMailService;
+    private final NotificationService notificationService;
 
     @Scheduled(cron = "0 0 * * * *")
     public void runDailyJob() {
         log.info("******************************************************");
         log.info("==================DAILY EMAIL JOB STARTED ==============");
 
-        List<Task> todaysTasks = taskRepository.findTasksByDueDateIsToday();
+        List<Task> upcomingAndPendingTasks = taskRepository.findUpcomingAndPendingTasks();
+        notificationService.storeNotification(upcomingAndPendingTasks);
 
-        Map<String, List<EmailTask>> tasksByUser = todaysTasks.stream()
-                .map(task -> new EmailTask(
+        Map<String, List<EmailTask>> tasksByUser = upcomingAndPendingTasks.stream()
+                .map(task ->
+                        new EmailTask(
                         task.getUser().getEmail(),
                         task.getId(),
                         task.getName(),

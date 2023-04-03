@@ -83,6 +83,7 @@ public class JavaMailService {
 
     }
 
+    // send pending tasks list email
     public void sendTodaysTaskList(String email, List<EmailTask> tasks) throws Exception {
         // Create a Thymeleaf context with the tasks list as a variable
 
