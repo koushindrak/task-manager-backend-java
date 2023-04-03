@@ -67,8 +67,18 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
             }
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-//            logger.error("\n\n Cannot set user authentication: {}", e);
+            boolean whileListed = false;
+            for (String s : WebSecurityConfig.whiteListedApis){
+                if(request.getRequestURI().contains(s) || s.contains(request.getRequestURI())){
+                    whileListed = true;
+                    break;
+                }
+            }
+            if(!whileListed){
+                throw new RuntimeException(e.getMessage());
+            }else {
+                logger.error("\n\n Cannot set user authentication===>>>>: {}", e);
+            }
         }
 
         filterChain.doFilter(request, response);
@@ -84,7 +94,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         logger.info("HEADER IS==== " + authHeader);
         boolean whileListed = false;
         for (String s : WebSecurityConfig.whiteListedApis){
-            if(request.getRequestURI().contains(s)){
+            if(request.getRequestURI().contains(s) || s.contains(request.getRequestURI())){
                 whileListed = true;
                 break;
             }
