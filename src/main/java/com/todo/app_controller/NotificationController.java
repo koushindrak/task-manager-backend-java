@@ -1,25 +1,28 @@
 package com.todo.app_controller;
 
 import com.todo.business.NotificationService;
-import com.todo.dto.NotificationRequest;
-import com.todo.dto.NotificationResponse;
-import jakarta.validation.Valid;
+import com.todo.dto.response.NotificationResponse;
+import com.todo.dto.response.SuccessResponse;
+import com.todo.entity.Notification;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+@Tag(name = "8-Notification Controller", description = "User can view all notifications(new to old)")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/api/v1/notifications")
 public class NotificationController {
 
     private final NotificationService notificationService;
 
-    public ResponseEntity<NotificationResponse> sendNotification(@Valid @RequestBody NotificationRequest notificationRequest){
-       NotificationResponse notificationResponse = notificationService.sendNotification(notificationRequest);
-       return new ResponseEntity<NotificationResponse>(notificationResponse, HttpStatus.OK);
+    @GetMapping
+    public SuccessResponse<List<NotificationResponse>> getNotificationForLoggedInUser() {
+        List<NotificationResponse> notificationResponses = notificationService.getNotificationForLoggedInUser();
+        return new SuccessResponse().retrieved(notificationResponses, Notification.class);
     }
 }

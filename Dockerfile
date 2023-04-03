@@ -1,5 +1,3 @@
-
-
 FROM openjdk:19-jdk-slim
 
 ENV GRADLE_VERSION=8.0.1
@@ -35,3 +33,4 @@ EXPOSE 8080
 
 # Start the application
 CMD ["java", "-jar", "build/libs/todolist-backend-0.0.1-SNAPSHOT.jar"]
+

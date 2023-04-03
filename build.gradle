@@ -64,6 +64,18 @@ dependencies {
 
 	// aws
 	implementation group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.12.434'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
+	implementation group: 'jakarta.mail', name: 'jakarta.mail-api', version: '2.1.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//utils
+	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+	////
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 }
 //

@@ -1,8 +1,11 @@
 package com.todo.app_controller;
 
 import com.todo.business.GroupService;
-import com.todo.dto.GroupRequest;
-import com.todo.dto.GroupResponse;
+import com.todo.dto.request.GroupRequest;
+import com.todo.dto.response.GroupResponse;
+import com.todo.dto.response.SuccessResponse;
+import com.todo.entity.Group;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,17 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "3-Group Controller", description = "Used for group crud")
 @RestController
-@RequestMapping("/groups")
+@RequestMapping("/api/v1/groups")
 @AllArgsConstructor
 public class GroupController {
 
     private final GroupService groupService;
 
     @PostMapping
-    public ResponseEntity<GroupResponse> createGroup(@RequestBody @Valid GroupRequest groupRequest) {
+    public SuccessResponse<GroupResponse> createGroup(@RequestBody @Valid GroupRequest groupRequest) {
         GroupResponse group = groupService.createGroup(groupRequest);
-        return new ResponseEntity<>(group, HttpStatus.CREATED);
+        return new SuccessResponse<GroupResponse>().created(group, Group.class);
     }
 
     @GetMapping

@@ -1,49 +1,50 @@
 package com.todo.app_controller;
 
 import com.todo.business.GroupUserService;
-import com.todo.dto.GroupResponse;
-import com.todo.dto.GroupUserRequest;
-import com.todo.dto.UserResponse;
+import com.todo.dto.request.GroupUserRequest;
+import com.todo.dto.response.GroupResponse;
+import com.todo.dto.response.SuccessResponse;
+import com.todo.dto.response.UserResponse;
+import com.todo.entity.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "4- Group User Controller", description = "Used for adding,removing and viewing users for groups")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/groups-users")
+@RequestMapping("/api/v1/groups-users")
 public class GroupUserController {
 
-    private  final GroupUserService groupUserService;
+    private final GroupUserService groupUserService;
 
     @PatchMapping("/add-user")
-    public ResponseEntity<Void> addUserToGroup(@Valid @RequestBody GroupUserRequest groupUserRequest){
+    public SuccessResponse addUserToGroup(@Valid @RequestBody GroupUserRequest groupUserRequest) {
         groupUserService.addUserToGroup(groupUserRequest);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new SuccessResponse<>().ok();
     }
 
     @PatchMapping("/remove-user")
-    public ResponseEntity<Void> removeUserFromGroup(@Valid @RequestBody GroupUserRequest groupUserRequest){
+    public SuccessResponse removeUserFromGroup(@Valid @RequestBody GroupUserRequest groupUserRequest) {
         groupUserService.removeUserFromGroup(groupUserRequest);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new SuccessResponse<>().ok();
     }
 
     // I can see the users only for those group, in which either I am owner or I'm member
     @GetMapping("/users-by-group")
-    public ResponseEntity<List<UserResponse>> getUserByGroup(@RequestParam Long groupId){
-        List<UserResponse> userResponseList= groupUserService.getUserByGroup(groupId);
-        return new ResponseEntity<>(userResponseList,HttpStatus.OK);
+    public SuccessResponse<List<UserResponse>> getUserByGroup(@RequestParam Long groupId) {
+        List<UserResponse> userResponseList = groupUserService.getUserByGroup(groupId);
+        return new SuccessResponse<List<UserResponse>>().retrieved(userResponseList, User.class);
     }
 
     // I can see only those group, in which either I am owner or I'm member
-    @GetMapping("/groups-by-user")
-    public ResponseEntity<List<GroupResponse>> getGroupsByUser(@RequestParam Long userId){
-        List<GroupResponse> groupResponseList= groupUserService.getGroupsByUser(userId);
-        return new ResponseEntity<>(groupResponseList,HttpStatus.OK);
+    @GetMapping("/my-groups")
+    public SuccessResponse<List<GroupResponse>> getGroupsByUser() {
+        List<GroupResponse> groupResponseList = groupUserService.getGroupsByUser();
+        return new SuccessResponse<List<GroupResponse>>().retrieved(groupResponseList, User.class);
     }
 
 }

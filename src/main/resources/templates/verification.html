@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification Email</title>
+    <style>
+        .button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h4>Dear [[${_NAME_}]]</h4>
+    <p style="text-align: left;">Thank you for registering on our website.
+        Please click the link below to verify your email address:</p>
+    <p>[[${_LINK_}]]</p>
+    <!--    <a href="[[${_LINK_}]]" class="button" target="_self">Verify Email</a>-->
+</div>
+</body>
+</html>

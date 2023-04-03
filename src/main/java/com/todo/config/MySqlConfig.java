@@ -85,16 +85,15 @@ public class MySqlConfig {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer(System.lineSeparator() + "MySqlConfig{" + System.lineSeparator());
-        sb.append("\tdriverClassName=").append(driverClassName).append(System.lineSeparator());
-        sb.append("\turl=").append(url).append(System.lineSeparator());
-        sb.append("\tusername=").append(username).append(System.lineSeparator());
-        sb.append("\tpassword=").append(password).append(System.lineSeparator());
-        sb.append("\tdialect=").append(dialect).append(System.lineSeparator());
-        sb.append("\tshow_sql=").append(show_sql).append(System.lineSeparator());
-        sb.append("\thibernateCreateMode=").append(hibernateCreateMode).append(System.lineSeparator());
-        sb.append('}' + System.lineSeparator());
-        return sb.toString();
+        String sb = System.lineSeparator() + "MySqlConfig{" + System.lineSeparator() + "\tdriverClassName=" + driverClassName + System.lineSeparator() +
+                "\turl=" + url + System.lineSeparator() +
+                "\tusername=" + username + System.lineSeparator() +
+                "\tpassword=" + password + System.lineSeparator() +
+                "\tdialect=" + dialect + System.lineSeparator() +
+                "\tshow_sql=" + show_sql + System.lineSeparator() +
+                "\thibernateCreateMode=" + hibernateCreateMode + System.lineSeparator() +
+                '}' + System.lineSeparator();
+        return sb;
     }
 }
 

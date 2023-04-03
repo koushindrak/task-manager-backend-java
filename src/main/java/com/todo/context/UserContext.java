@@ -1,6 +1,6 @@
 package com.todo.context;
 
-import com.todo.constants.Role;
+import com.todo.constants.ERole;
 
-public record UserContext(Long id, String name, String email, Role role) {
+public record UserContext(Long id, String name, String email, ERole role) {
 }

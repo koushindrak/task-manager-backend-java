@@ -28,7 +28,7 @@ public class Project extends ParentEntity {
     private Date endDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status",columnDefinition = "ENUM('ACTIVE', 'INACTIVE')")
+    @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'INACTIVE')")
     private ProjectStatus status;
 
     @ManyToOne

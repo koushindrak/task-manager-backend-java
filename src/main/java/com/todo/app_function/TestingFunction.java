@@ -1,6 +1,6 @@
 package com.todo.app_function;
 
-import com.todo.dto.UserResponse;
+import com.todo.dto.response.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

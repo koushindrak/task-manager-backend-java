@@ -22,9 +22,8 @@ import java.util.Properties;
 @Import(MySqlConfig.class)
 @EnableTransactionManagement
 public class JPAConfig {
-    private final MySqlConfig mySqlConfig;
-
     private static final Logger LOG = LogManager.getLogger();
+    private final MySqlConfig mySqlConfig;
 
     public JPAConfig(MySqlConfig mySqlConfig) {
         this.mySqlConfig = mySqlConfig;

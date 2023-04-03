@@ -1,12 +1,11 @@
 package com.todo.business;
 
 import com.todo.a_utils.CommonUtils;
-import com.todo.context.ExecutionContext;
-import com.todo.dao.TaskRepository;
-import com.todo.dto.TaskRequest;
-import com.todo.dto.TaskResponse;
-import com.todo.entity.Task;
 import com.todo.a_utils.TaskUtils;
+import com.todo.dao.TaskRepository;
+import com.todo.dto.request.TaskRequest;
+import com.todo.dto.response.TaskResponse;
+import com.todo.entity.Task;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.Data;
@@ -25,34 +24,35 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskUtils taskUtils;
     private final CommonUtils commonUtils;
+    private final CommentService commentService;
 
     public TaskResponse createTask(TaskRequest taskRequest) {
         Task task = new Task();
         task.setUser(commonUtils.getCurrentUser());
-        task = taskUtils.saveOrUpdateTask(taskRequest, task);
-        CommonUtils.printJson(task);
-
-        return TaskUtils.toTaskResponse(task);
+        return taskUtils.saveOrUpdateTask(taskRequest, task);
     }
+
     public List<TaskResponse> getTasks() {
         List<Task> tasks = taskRepository.findAllByUser_Id(CommonUtils.getLoggedInUserId());
         return tasks.stream().map(task -> TaskUtils.toTaskResponse(task)).collect(Collectors.toList());
     }
 
     public TaskResponse getTaskById(Long id) {
-        Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+        Task task = taskRepository.getTaskByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
-        return TaskUtils.toTaskResponse(task);
+        TaskResponse taskResponse = TaskUtils.toTaskResponse(task);
+        taskResponse.setComments(commentService.getCommentsByTaskId(id));
+        return taskResponse;
     }
 
-    public Task updateTask(Long id, TaskRequest taskRequest) {
-        Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+    public TaskResponse updateTask(Long id, TaskRequest taskRequest) {
+        Task task = taskRepository.getTaskByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
         return taskUtils.saveOrUpdateTask(taskRequest, task);
     }
 
     public TaskResponse deleteTask(Long id) {
-        Task task = taskRepository.getTaskByIdAndUser_Id(id,CommonUtils.getLoggedInUserId())
+        Task task = taskRepository.getTaskByIdAndUser_Id(id, CommonUtils.getLoggedInUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
         taskRepository.delete(task);
         return TaskUtils.toTaskResponse(task);
