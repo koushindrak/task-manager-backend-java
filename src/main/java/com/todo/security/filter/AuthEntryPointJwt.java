@@ -44,9 +44,15 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
         }
         Throwable throwable = (Throwable) request.getAttribute("jakarta.servlet.error.exception");
+        Integer statusCode = 0;
         String message = authException.getMessage();
         if (throwable != null) {
             message = throwable.getMessage();
+        }else {
+            statusCode =  Integer.valueOf(String.valueOf(request.getAttribute("jakarta.servlet.error.status_code")));
+            if(statusCode != null){
+                message = "Invalid Api Path - "+request.getAttribute("jakarta.servlet.error.request_uri");
+            }
         }
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -59,6 +65,14 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         map.put("detail",authException.getMessage());
         map.put("httpStatus",HttpStatus.UNAUTHORIZED.value());
 
+        if(HttpStatus.NOT_FOUND.value() == statusCode){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            map.put("errorCategory",ErrorCategory.CLIENT_SIDE_ERROR);
+            map.put("errorCode",ErrorCode.INVALID_API_PATH);
+            map.put("displayError",message);
+            map.put("detail","There is some spelling mistake in API path, Please check and fix it");
+            map.put("httpStatus",HttpStatus.NOT_FOUND.value());
+        }
         final ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), map);
     }

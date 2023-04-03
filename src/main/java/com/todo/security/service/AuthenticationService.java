@@ -103,7 +103,7 @@ public class AuthenticationService {
             throw new AuthenticationException("Verification code is already used");
         }
 
-        if (ChronoUnit.MINUTES.between(user.getUpdatedAt().toInstant(), Instant.now()) > 1) {
+        if (ChronoUnit.MINUTES.between(user.getUpdatedAt().toInstant(), Instant.now()) > 15) {
             user.setVerificationCodeExpired(true);
             user.setEnabled(false);
             userRepository.save(user);

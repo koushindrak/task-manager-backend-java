@@ -18,6 +18,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 //@EnableGlobalMethodSecurity(
 //        // securedEnabled = true,
@@ -71,8 +74,11 @@ public class WebSecurityConfig {
 //    return http.build();
 //  }
 
+    static List<String> whiteListedApis = Arrays.asList("/api/v1/auth/","/api/v2/auth/",
+            "/swagger-ui/","/v3/api-docs.yml","/api-docs/","/users/","/ping/");
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .cors().and().csrf().disable()
 

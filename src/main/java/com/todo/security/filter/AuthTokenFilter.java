@@ -82,9 +82,23 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private String parseJwt(HttpServletRequest request){
         final String authHeader = request.getHeader("Authorization");
         logger.info("HEADER IS==== " + authHeader);
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new AuthenticationException("Invalid Header");
+        boolean whileListed = false;
+        for (String s : WebSecurityConfig.whiteListedApis){
+            if(request.getRequestURI().contains(s)){
+                whileListed = true;
+                break;
+            }
         }
+        if(whileListed){
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return authHeader;
+            }
+        }else {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                throw new AuthenticationException("Invalid Header");
+            }
+        }
+
       return authHeader.substring(7);
     }
 
