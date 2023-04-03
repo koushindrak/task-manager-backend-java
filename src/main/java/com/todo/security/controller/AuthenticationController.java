@@ -27,7 +27,7 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public SuccessResponse<UserResponse> register(@Valid @RequestBody RegisterRequest request, HttpServletRequest httpServletRequest) {
         User user = service.signup(request,httpServletRequest);
-        return new SuccessResponse<UserResponse>().ok(UserUtils.toUserResponse(user),"User Registered Successfully");
+        return new SuccessResponse<UserResponse>().ok(UserUtils.toUserResponse(user),"An Email is sent with verification link, pls verify to complete your registration");
     }
 
     @PostMapping("/signin")
