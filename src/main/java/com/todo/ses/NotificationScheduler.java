@@ -5,6 +5,7 @@ import com.todo.entity.Task;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -18,7 +19,7 @@ public class NotificationScheduler {
     private final TaskRepository taskRepository;
     private final JavaMailService javaMailService;
 
-    //    @Scheduled(cron = "0 27 3 * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void runDailyJob() {
         log.info("******************************************************");
         log.info("==================DAILY EMAIL JOB STARTED ==============");
