@@ -8,6 +8,7 @@ import com.todo.security.dto.AuthenticationRequest;
 import com.todo.security.dto.AuthenticationResponse;
 import com.todo.security.dto.RegisterRequest;
 import com.todo.security.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -40,6 +41,7 @@ public class AuthenticationController {
         return null;
     }
 
+    @Hidden
     @GetMapping("/verify")
     public String verifyUser(@Param("code") String code) {
         service.verify(code);
