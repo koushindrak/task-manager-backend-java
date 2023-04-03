@@ -15,11 +15,13 @@ public class EmailTask {
     private LocalDate taskDueDate;
     private String groupName;
     private String projectName;
+    private String taskStatus;
 
-    public EmailTask(String taskName, LocalDate taskDueDate, String groupName, String projectName) {
+    public EmailTask(String taskName, LocalDate taskDueDate, String groupName, String projectName,String taskStatus) {
         this.taskName = taskName;
         this.taskDueDate = taskDueDate;
         this.groupName = groupName;
         this.projectName = projectName;
+        this.taskStatus = taskStatus;
     }
 }

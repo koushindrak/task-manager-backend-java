@@ -33,7 +33,7 @@ public class NotificationScheduler {
                         task.getName(),
                         LocalDate.fromDateFields(task.getDueDate()),
                         task.getGroup() == null ? "-" : task.getGroup().getName(),
-                        task.getProject() == null ? "-" : task.getProject().getName()))
+                        task.getProject() == null ? "-" : task.getProject().getName(),task.getTaskStatus().name()))
                 .collect(Collectors.groupingBy(
                         EmailTask::getEmail,
                         LinkedHashMap::new,
@@ -49,7 +49,7 @@ public class NotificationScheduler {
             tasks.forEach(task -> {
                 EmailTask emailTask = new EmailTask(task.getTaskName(), task.getTaskDueDate(),
                         task.getGroupName() == null ? "_" : task.getGroupName(),
-                        task.getProjectName() == null ? "_" : task.getProjectName());
+                        task.getProjectName() == null ? "_" : task.getProjectName(),task.getTaskStatus());
                 emailTasks.add(emailTask);
             });
 
