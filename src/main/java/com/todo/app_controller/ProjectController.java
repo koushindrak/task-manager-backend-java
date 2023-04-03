@@ -4,7 +4,9 @@ import com.todo.business.ProjectService;
 import com.todo.dto.request.ProjectRequest;
 import com.todo.dto.response.ProjectResponse;
 import com.todo.dto.response.SuccessResponse;
+import com.todo.dto.response.TaskResponse;
 import com.todo.entity.Project;
+import com.todo.entity.Task;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -33,6 +35,12 @@ public class ProjectController {
     public SuccessResponse<ProjectResponse> getProjectById(@PathVariable Long id) {
         ProjectResponse project = projectService.getProjectById(id);
         return new SuccessResponse<ProjectResponse>().retrieved(project, Project.class);
+    }
+
+    @GetMapping("/{id}/tasks")
+    public SuccessResponse<List<TaskResponse>> getTaskListByProjectId(@PathVariable Long id) {
+        List<TaskResponse> taskResponse = projectService.getTaskListByProjectId(id);
+        return new SuccessResponse<List<TaskResponse>>().retrieved(taskResponse, Task.class);
     }
 
     @GetMapping

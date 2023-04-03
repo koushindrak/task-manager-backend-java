@@ -23,7 +23,7 @@ public class TaskRequest {
     @NotBlank(message = "Task name can not be blank")
     private String name;
 
-    @Size(min = 0, max = 30)
+    @Size(min = 0, max = 255)
     private String description;
 
     @FutureOrPresent(message = "Task can be created for Present or Future dates")

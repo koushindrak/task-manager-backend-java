@@ -5,6 +5,7 @@ import com.todo.a_utils.ProjectUtils;
 import com.todo.dao.ProjectRepository;
 import com.todo.dto.request.ProjectRequest;
 import com.todo.dto.response.ProjectResponse;
+import com.todo.dto.response.TaskResponse;
 import com.todo.entity.Project;
 import com.todo.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectUtils projectUtils;
     private final CommonUtils commonUtils;
+    private final TaskService taskService;
 
     public ProjectResponse createProject(ProjectRequest projectRequest) {
 
@@ -56,5 +58,10 @@ public class ProjectService {
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
         projectRepository.delete(project);
         return projectUtils.toProjectResponse(project);
+    }
+
+    public List<TaskResponse> getTaskListByProjectId(Long projectId) {
+        List<TaskResponse> taskResponses = taskService.getTasksByProjectId(projectId);
+        return taskResponses;
     }
 }

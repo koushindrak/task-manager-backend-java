@@ -57,4 +57,9 @@ public class TaskService {
         taskRepository.delete(task);
         return TaskUtils.toTaskResponse(task);
     }
+
+    public List<TaskResponse> getTasksByProjectId(Long projectId){
+        List<Task> tasks = taskRepository.findTasksByProject_Id(projectId);
+        return tasks.stream().map(task -> TaskUtils.toTaskResponse(task)).collect(Collectors.toList());
+    }
 }

@@ -18,7 +18,7 @@ public class Label extends ParentEntity {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @Column(length = 100)
+    @Column(length = 255)
     private String description;
 
     @ManyToOne
