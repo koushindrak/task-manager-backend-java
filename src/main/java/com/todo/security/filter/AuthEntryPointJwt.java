@@ -49,10 +49,11 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         if (throwable != null) {
             message = throwable.getMessage();
         }else {
-            statusCode =  Integer.valueOf(String.valueOf(request.getAttribute("jakarta.servlet.error.status_code")));
-            if(statusCode != null){
-                message = "Invalid Api Path - "+request.getAttribute("jakarta.servlet.error.request_uri");
-            }
+            var attr = request.getAttribute("jakarta.servlet.error.status_code");
+            if(attr != null){
+                statusCode =  Integer.valueOf(String.valueOf(attr));
+                    message = "Invalid Api Path - "+request.getAttribute("jakarta.servlet.error.request_uri");
+                }
         }
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
