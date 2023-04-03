@@ -55,7 +55,7 @@ public class NotificationScheduler {
 
             try {
                 javaMailService.sendTodaysTaskList(email, emailTasks);
-                log.info("============= DAILY TASK'S MAIL SENT TO USER - " + email + "===================");
+                log.info("============= DAILY TASK'S MAIL SENT TO USER - " + email + "=================== \n\n email tasks--"+emailTasks);
             } catch (Exception e) {
                 log.info("Exception Occured while Sending daily mail to user - " + email + "===================");
                 throw new RuntimeException(e);

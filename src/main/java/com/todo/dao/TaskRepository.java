@@ -49,9 +49,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             " t.id as task_id," +
             "t.name as task_name," +
             "t.dueDate as task_due_date" +
-            " FROM Task t ")
+            " FROM Task t order by task_due_date asc")
     List<Object[]> findTasksDueTodayByUser();
 
-    @Query("SELECT t FROM Task t WHERE DATE(t.dueDate) = CURRENT_DATE")
+    @Query("SELECT t FROM Task t WHERE DATE(t.dueDate) > CURRENT_DATE")
     List<Task> findTasksByDueDateIsToday();
 }
