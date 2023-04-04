@@ -22,12 +22,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @Component
@@ -68,7 +69,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     setExecutionContext(userDetails.getUsername());
-                    logger.info("\n\n\n User "+userDetails.getUsername()+" is calling below api:\n\n"+httpServletRequestToString(request));
+                    String api_call = "\n\n Time - "+ Calendar.getInstance(TimeZone.getTimeZone("America/Toronto")).getTime() +" \n User "+userDetails.getUsername()+" called below api:\n\n"+httpServletRequestToString(request);
+                    logger.info(api_call);
+                    whenWriteStringUsingBufferedWritter_thenCorrect(api_call);
                 }
 
 
@@ -96,6 +99,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 //        String jwt = jwtUtils.getJwtFromCookies(request);
 //        return jwt;
 //    }
+    public void whenWriteStringUsingBufferedWritter_thenCorrect(String str)
+            throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("api-calls.log"));
+        writer.write(str);
+        writer.close();
+    }
     private String parseJwt(HttpServletRequest request) {
         final String authHeader = request.getHeader("Authorization");
         logger.info("HEADER IS==== " + authHeader);
