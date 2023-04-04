@@ -22,7 +22,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
@@ -62,21 +68,22 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     setExecutionContext(userDetails.getUsername());
+                    logger.info("\n\n\n User "+userDetails.getUsername()+" is calling below api:\n\n"+httpServletRequestToString(request));
                 }
 
 
             }
         } catch (Exception e) {
             boolean whileListed = false;
-            for (String s : WebSecurityConfig.whiteListedApis){
-                if(request.getRequestURI().contains(s) || s.contains(request.getRequestURI())){
+            for (String s : WebSecurityConfig.whiteListedApis) {
+                if (request.getRequestURI().contains(s) || s.contains(request.getRequestURI())) {
                     whileListed = true;
                     break;
                 }
             }
-            if(!whileListed){
+            if (!whileListed) {
                 throw new RuntimeException(e.getMessage());
-            }else {
+            } else {
                 logger.error("\n\n Cannot set user authentication===>>>>: {}", e);
             }
         }
@@ -89,27 +96,28 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 //        String jwt = jwtUtils.getJwtFromCookies(request);
 //        return jwt;
 //    }
-    private String parseJwt(HttpServletRequest request){
+    private String parseJwt(HttpServletRequest request) {
         final String authHeader = request.getHeader("Authorization");
         logger.info("HEADER IS==== " + authHeader);
         boolean whileListed = false;
-        for (String s : WebSecurityConfig.whiteListedApis){
-            if(request.getRequestURI().contains(s) || s.contains(request.getRequestURI())){
+        for (String s : WebSecurityConfig.whiteListedApis) {
+            if (request.getRequestURI().contains(s) || s.contains(request.getRequestURI())) {
                 whileListed = true;
                 break;
             }
         }
-        if(whileListed){
+        if (whileListed) {
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 return authHeader;
             }
-        }else {
+        } else {
+            logger.info("\n\n\nRequest Details---\n" + httpServletRequestToString(request));
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 throw new AuthenticationException("Invalid Header");
             }
         }
 
-      return authHeader.substring(7);
+        return authHeader.substring(7);
     }
 
     private void setExecutionContext(String username) {
@@ -117,5 +125,36 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         UserContext userContext = new UserContext(user.getId(), user.getFirstName() + " " + user.getLastName(), user.getEmail(), user.getRole());
         ExecutionContext executionContext = new ExecutionContext(userContext);
         ExecutionContext.set(executionContext);
+    }
+
+    private String httpServletRequestToString(HttpServletRequest request) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(" Request Method = [" + request.getMethod() + "], \n");
+        sb.append(" Request URL Path = [" + request.getRequestURL() + "], \n");
+
+        String headers =
+                Collections.list(request.getHeaderNames()).stream()
+                        .map(headerName -> headerName + " : " + Collections.list(request.getHeaders(headerName)))
+                        .collect(Collectors.joining(", "));
+
+        if (headers.isEmpty()) {
+            sb.append(" Request headers: NONE,\n");
+        } else {
+            sb.append(" Request headers: [" + headers + "],\n");
+        }
+
+        String parameters =
+                Collections.list(request.getParameterNames()).stream()
+                        .map(p -> p + " : " + Arrays.asList(request.getParameterValues(p)))
+                        .collect(Collectors.joining(", "));
+
+        if (parameters.isEmpty()) {
+            sb.append(" Request parameters: NONE.\n");
+        } else {
+            sb.append(" Request parameters: [" + parameters + "].\n");
+        }
+
+        return sb.toString();
     }
 }
