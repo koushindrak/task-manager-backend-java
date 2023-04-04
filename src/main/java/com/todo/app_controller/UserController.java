@@ -39,18 +39,18 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/kk/{id}")
     public SuccessResponse<UserResponse> getUserById(@PathVariable("id") @Parameter(description = "User ID", example = "1") Long id) {
         return new SuccessResponse<UserResponse>().retrieved(userService.getUserById(id), User.class);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/kk/{id}")
     public SuccessResponse<User> updateUser(@PathVariable("id") Long id,
                                             @Valid @RequestBody UserRequest userRequest) {
         return new SuccessResponse<User>().updated(userService.updateUser(id, userRequest), User.class);
     }
 
-    @DeleteMapping("/{id}/{code}")
+    @DeleteMapping("/kk/{id}")
     public SuccessResponse<UserResponse> deleteUser(
             @PathVariable("id") @Parameter(description = "User ID", example = "1") Long id,
             @PathVariable String code) {

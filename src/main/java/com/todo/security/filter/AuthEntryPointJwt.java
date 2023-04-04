@@ -38,8 +38,9 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         Iterator iterator = request.getAttributeNames().asIterator();
         while (iterator.hasNext()) {
             var attributeName = iterator.next().toString();
-            log.info(attributeName + "==" + request.getAttribute(attributeName).toString());
-
+            if(!attributeName.equals("org.springframework.core.convert.ConversionService")){
+                log.info(attributeName + "==" + request.getAttribute(attributeName).toString());
+            }
         }
         Throwable throwable = (Throwable) request.getAttribute("jakarta.servlet.error.exception");
         Integer statusCode = 0;

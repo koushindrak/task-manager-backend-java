@@ -4,6 +4,8 @@ import com.todo.entity.User;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Date;
+
 @Data
 public class UserResponse {
     private Long id;
@@ -11,6 +13,7 @@ public class UserResponse {
     private String lastName;
     private String email;
     private String phoneNumber;
+    private Date createdAt;
 
     public UserResponse() {
     }
