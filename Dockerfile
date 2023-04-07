@@ -19,7 +19,7 @@ ENV PATH=${GRADLE_HOME}/bin:${PATH}
 WORKDIR /app
 
 # Copy the build files
-COPY build.gradle gradlew gradlew.bat my-links settings.gradle ./
+COPY build.gradle gradlew gradlew.bat settings.gradle ./
 
 # Copy the source code
 COPY src ./src
