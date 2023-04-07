@@ -37,6 +37,7 @@ public class TaskUtils {
         TaskResponse taskResponse = new TaskResponse();
         BeanUtils.copyProperties(task, taskResponse,"labels");
         List<TaskLabelResponse> labels = new ArrayList<>();
+        taskResponse.setStatus(task.getTaskStatus());
         log.info("Labels for task id " + task.getId() + " are-" + task.getLabels());
         setLabels(task, taskResponse, labels);
         taskResponse.setDueDate(task.getDueDate());

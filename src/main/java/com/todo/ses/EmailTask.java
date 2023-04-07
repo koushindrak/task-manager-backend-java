@@ -3,11 +3,13 @@ package com.todo.ses;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.joda.time.LocalDate;
 
 @AllArgsConstructor
 @Setter
 @Getter
+@ToString
 public class EmailTask {
     private String email;
     private Long taskId;

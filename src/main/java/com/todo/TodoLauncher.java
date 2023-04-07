@@ -18,21 +18,8 @@ import javax.sql.DataSource;
 @EnableScheduling
 public class TodoLauncher  {
 
-    @Autowired
-    private DataSource dataSource;
-
     public static void main(String[] args) {
         SpringApplication.run(TodoLauncher.class, args);
     }
 
-
-    @PostConstruct
-    public void ru1() throws Exception {
-        try {
-            Resource schema = new ClassPathResource("schema.sql");
-            ScriptUtils.executeSqlScript(dataSource.getConnection(), schema);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

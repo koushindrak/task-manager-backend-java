@@ -101,7 +101,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 //    }
     public void whenWriteStringUsingBufferedWritter_thenCorrect(String str)
             throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("api-calls.log",true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.home") +
+                "/api-calls.log",true));
         writer.write(str);
         writer.close();
     }

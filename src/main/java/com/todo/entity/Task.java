@@ -43,17 +43,17 @@ public class Task extends ParentEntity {
     @JsonIgnoreProperties("tasks")
     private User user;
 
-    @ManyToMany(mappedBy = "tasks", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tasks", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("tasks")
     private Set<Label> labels;
 
     @ManyToOne
     private Group group;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task",cascade = CascadeType.ALL)
     private Set<Notification> notifications;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task",cascade = CascadeType.ALL)
     private Set<Comments> comments;
 
     @ManyToOne

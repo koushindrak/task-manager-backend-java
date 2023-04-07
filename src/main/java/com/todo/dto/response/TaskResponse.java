@@ -1,5 +1,6 @@
 package com.todo.dto.response;
 
+import com.todo.constants.TaskStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,6 +14,8 @@ public class TaskResponse {
     private String name;
 
     private String description;
+
+    private TaskStatus status;
 
     //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dueDate;
