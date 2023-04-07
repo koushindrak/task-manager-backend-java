@@ -29,7 +29,7 @@ COPY src ./src
 RUN gradle clean build --warning-mode=none
 
 # Expose the port on which the application will run
-EXPOSE 8080
+EXPOSE 2612
 
 # Start the application
 CMD ["java", "-jar", "build/libs/todolist-backend-0.0.1-SNAPSHOT.jar"]
