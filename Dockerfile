@@ -8,6 +8,9 @@ RUN wget -q https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-b
     && unzip gradle-${GRADLE_VERSION}-bin.zip -d /opt \
     && rm gradle-${GRADLE_VERSION}-bin.zip
 
+
+ENV SPRING_PROFILES_ACTIVE prod
+
 # Set Gradle home environment variable
 ENV GRADLE_HOME=/opt/gradle-${GRADLE_VERSION}
 
