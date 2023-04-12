@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS todolist1;
-use todolist1;
+CREATE DATABASE IF NOT EXISTS todolist;
+use todolist;
 set foreign_key_checks = 0;
 CREATE TABLE IF NOT EXISTS `comments` (
                                           `id` bigint NOT NULL AUTO_INCREMENT,
