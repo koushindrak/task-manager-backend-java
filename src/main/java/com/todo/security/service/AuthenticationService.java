@@ -65,6 +65,7 @@ public class AuthenticationService {
         String randomCode = RandomStringUtils.random(64, true, true);
         User user = optionalUser.orElseGet(User::new);
         toUser(request, randomCode, user);
+        user.setEnabled(true);
         user = repository.save(user);
         try {
             javaMailService.sendVerificationEmail(user, getSiteURL(httpServletRequest));
